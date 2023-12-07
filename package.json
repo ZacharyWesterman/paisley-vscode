@@ -1,0 +1,23 @@
+{
+  "name": "paisley",
+  "displayName": "Paisley",
+  "description": "Syntax highlighting for the Paisley scripting language.",
+  "version": "0.0.1",
+  "publisher": "senor-cluckens",
+  "engines": {
+    "vscode": ">=1.80.0"
+  },
+  "contributes": {
+    "languages": [{
+      "id": "paisley",
+      "aliases": ["Paisley", "paisley"],
+      "extensions": [".paisley"],
+      "configuration": "./language-configuration.json"
+    }],
+    "grammars": [{
+      "language": "paisley",
+      "scopeName": "source.paisley",
+      "path": "./syntaxes/paisley.tmLanguage.json"
+    }]
+  }
+}
