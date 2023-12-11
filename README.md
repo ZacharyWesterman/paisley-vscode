@@ -9,7 +9,7 @@ npm install -g @vscode/vsce
 
 Once that's installed, run the following to build the vcix file.
 ```
-vcse package
+vsce package
 ```
 
 now you can install the vcix file in VSCode.
