@@ -55,7 +55,7 @@
 		"commands": {
 			"patterns": [{
 				"name": "variable.language.paisley",
-				"match": "(^|(?<=\\bdo\\b|\\bthen\\b|;|\\w:|\\bend\\b))[ \\t]*(?!(for|while|in|do|if|then|elif|else|end|continue|break|subroutine|gosub|return|stop|delete|let|define)\\b)\\w+\\b(?!:)"
+				"match": "(^|(?<=\\bdo\\b|\\bthen\\b|;|\\w:|\\bend\\b|\\belse\\b))[ \\t]*(?!(for|while|in|do|if|then|elif|else|end|continue|break|subroutine|gosub|return|stop|delete|let|define)\\b)\\w+\\b(?!:)"
 			},
 
 			{
