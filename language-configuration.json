@@ -27,5 +27,10 @@
         ["(", ")"],
         ["\"", "\""],
         ["'", "'"]
-    ]
+    ],
+    // Indent after certain keywords
+    "indentationRules": {
+        "increaseIndentPattern": "\\b(do|then|else|\\w+:)\\s*$",
+        "decreaseIndentPattern": "^\\s*(end|else|elif)\\s*$"
+    }
 }
