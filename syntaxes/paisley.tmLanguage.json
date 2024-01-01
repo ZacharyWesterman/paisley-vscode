@@ -66,10 +66,10 @@
 		"labels": {
 			"patterns": [{
 				"name": "support.class.paisley",
-				"match": "\\b\\w+:"
+				"match": "(?<=subroutine)[ \\t]+[^'\"\\$\\{\\} \\t]+"
 			}, {
 				"name": "support.class.paisley",
-				"match": "(?<=gosub)[ \\t]+\\w+"
+				"match": "(?<=gosub)[ \\t]+[^'\"\\$\\{\\} \\t]+"
 			}]
 		},
 
