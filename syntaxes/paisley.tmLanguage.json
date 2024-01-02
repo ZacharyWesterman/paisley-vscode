@@ -114,6 +114,19 @@
 					"name": "keyword.control.paisley",
 					"match": "\\b(in|exists|like|and|or|not|xor|if|else)\\b"
 				},
+				{
+					"name": "meta.list_comp.paisley",
+					"match": "\\b(for)([ \\t]+[a-zA-Z_]\\w*[ \\t]+)(in)\\b",
+					"captures": {
+						"1": { "name": "keyword.control.paisley" },
+						"2": { "name": "entity.name.variable.paisley" },
+						"3": { "name": "keyword.control.paisley" }
+					}
+				},
+				{
+					"name": "keyword.control.paisley",
+					"match": "\\bfor\\b(?![ \\t]+[a-zA-Z_]\\w*[ \\t]+in\\b)"
+				},
 
 				{
 					"name": "constant.language.paisley",
