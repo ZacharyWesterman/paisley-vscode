@@ -2,6 +2,69 @@
 	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
 	"name": "Paisley",
 	"patterns": [
+		{
+			"name": "comment.line.debug.paisley",
+			"begin": "#!",
+			"end": "$",
+			"patterns": [
+				{
+					"name": "keyword.control.paisley",
+					"begin": "(?<=#!)[ \\t]*COMMANDS\\b",
+					"end": "$",
+					"patterns": [
+						{
+							"name": "comment.line.semicolon.paisley",
+							"begin": "[;#]",
+							"end": "$"
+						},
+						{
+							"name": "keyword.paisley",
+							"match": "(?<!:)[ \\t]*\\b[^:, \\t'\"\\{\\};]+"
+						},
+						{
+							"name": "keyword.paisley",
+							"match": "(?<=:)[ \\t]*(null|boolean|number|string|array|any)\\b"
+						},
+						{
+							"name": "invalid.illegal.bad_return_value.paisley",
+							"match": "(?<=:)[ \\t]*[^:, \\t'\"\\{\\};]+"
+						},
+						{
+							"name": "comment.line.ignore.paisley",
+							"match": "."
+						}
+					]
+				},
+				{
+					"name": "keyword.control.paisley",
+					"begin": "(?<=#!)[ \\t]*DEBUG\\b",
+					"end": "$",
+					"patterns": [
+						{
+							"name": "comment.line.semicolon.paisley",
+							"begin": "[;#]",
+							"end": "$"
+						},
+						{
+							"name": "comment.line.sublang.paisley",
+							"begin": ":",
+							"end": "(?=#)|$",
+							"patterns": [
+								{ "include": "source.js" }
+							]
+						},
+						{
+							"name": "keyword.paisley",
+							"match": "(?<!DEBUG)[ \\t]*\\b[^:, \\t'\"\\{\\};]+"
+						},
+						{
+							"name": "comment.line.ignore.paisley",
+							"match": "."
+						}
+					]
+				}
+			]
+		},
 		{ "include": "#comments" },
 		{ "include": "#keywords" },
 		{ "include": "#commands" },
