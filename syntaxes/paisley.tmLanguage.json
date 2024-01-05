@@ -199,11 +199,7 @@
 
 				{
 					"name": "entity.name.function.paisley",
-					"match": "\\b[a-zA-Z_]\\w*(?=[ \\t]*\\()\\b"
-				},
-				{
-					"name": "keyword.paisley",
-					"match": "\\."
+					"match": "\\b(\\.[ \\t]*)?[a-zA-Z_]\\w*(?=[ \\t]*\\()\\b"
 				},
 
 				{ "include": "#strings" },
