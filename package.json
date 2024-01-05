@@ -1,8 +1,8 @@
 {
   "name": "paisley",
   "displayName": "Paisley",
-  "description": "Syntax highlighting for the Paisley scripting language.",
-  "version": "0.0.1",
+  "description": "Syntax highlighter and snippets for the Paisley scripting language.",
+  "version": "0.0.2",
   "publisher": "senor-cluckens",
   "engines": {
     "vscode": ">=1.80.0"
@@ -18,6 +18,12 @@
       "language": "paisley",
       "scopeName": "source.paisley",
       "path": "./syntaxes/paisley.tmLanguage.json"
-    }]
+    }],
+    "snippets": [
+      {
+        "language": "paisley",
+        "path": "./snippets/paisley-snippets.json"
+      }
+    ]
   }
 }
