@@ -4,6 +4,17 @@
 	"patterns": [
 		{
 			"name": "comment.line.debug.paisley",
+			"begin": "#![ \\t]*(DEBUG)[ \\t]+(\\w+)",
+			"end": "\\b(END)\\b",
+			"captures": {
+				"1": { "name": "keyword.control.paisley" },
+				"2": { "name": "keyword.paisley" },
+				"3": { "name": "keyword.control.paisley" }
+			},
+			"patterns": [{ "include": "source.js" }]
+		},
+		{
+			"name": "comment.line.debug.paisley",
 			"begin": "#!",
 			"end": "$",
 			"patterns": [
@@ -28,34 +39,6 @@
 						{
 							"name": "invalid.illegal.bad_return_value.paisley",
 							"match": "(?<=:)[ \\t]*[^:, \\t'\"\\{\\};]+"
-						},
-						{
-							"name": "comment.line.ignore.paisley",
-							"match": "."
-						}
-					]
-				},
-				{
-					"name": "keyword.control.paisley",
-					"begin": "(?<=#!)[ \\t]*DEBUG\\b",
-					"end": "$",
-					"patterns": [
-						{
-							"name": "comment.line.semicolon.paisley",
-							"begin": "[;#]",
-							"end": "$"
-						},
-						{
-							"name": "comment.line.sublang.paisley",
-							"begin": ":",
-							"end": "(?=#)|$",
-							"patterns": [
-								{ "include": "source.js" }
-							]
-						},
-						{
-							"name": "keyword.paisley",
-							"match": "(?<!DEBUG)[ \\t]*\\b[^:, \\t'\"\\{\\};]+"
 						},
 						{
 							"name": "comment.line.ignore.paisley",
