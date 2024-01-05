@@ -1,4 +1,25 @@
 {
+	"Command List": {
+		"scope": "paisley",
+		"prefix": ["COMMANDS"],
+		"body": [
+			"#!COMMANDS ${1:command1}:${2:return_type}, ${3:command2}:${4:return_type}${5: #Etc. Return type can be null, boolean, number, string, array, or any. A blank return type implies any.}"
+		],
+		"description": "Tell VSCode about what commands are valid and what kind of data they will return."
+	},
+	"Command Behavior": {
+		"scope": "paisley",
+		"prefix": ["DEBUG"],
+		"body": [
+			"#!DEBUG ${1:command_name} params => {",
+			"#\t//Use Javascript to emulate the command's behavior.",
+			"#\t//This function should return whatever the actual command would.",
+			"#\t//If there was an error, call the ERROR(msg) function.",
+			"#\t$2",
+			"#}END"
+		],
+		"description": "Tell VSCode how a command should behave when run."
+	},
 	"While Loop": {
 		"scope": "paisley",
 		"prefix": [
