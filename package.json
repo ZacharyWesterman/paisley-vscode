@@ -17,17 +17,26 @@
   ],
   "main": "./client/out/extension",
   "contributes": {
-    "languages": [{
-      "id": "paisley",
-      "aliases": ["Paisley", "paisley"],
-      "extensions": [".paisley"],
-      "configuration": "./language-configuration.json"
-    }],
-    "grammars": [{
-      "language": "paisley",
-      "scopeName": "source.paisley",
-      "path": "./syntaxes/paisley.tmLanguage.json"
-    }]
+    "languages": [
+      {
+        "id": "paisley",
+        "aliases": [
+          "Paisley",
+          "paisley"
+        ],
+        "extensions": [
+          ".paisley"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "paisley",
+        "scopeName": "source.paisley",
+        "path": "./syntaxes/paisley.tmLanguage.json"
+      }
+    ]
   },
   "scripts": {
     "vscode:prepublish": "npm run compile",
