@@ -27,13 +27,7 @@
       "language": "paisley",
       "scopeName": "source.paisley",
       "path": "./syntaxes/paisley.tmLanguage.json"
-    }],
-    "snippets": [
-      {
-        "language": "paisley",
-        "path": "./snippets/paisley-snippets.json"
-      }
-    ]
+    }]
   },
   "scripts": {
     "vscode:prepublish": "npm run compile",
