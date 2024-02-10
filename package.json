@@ -1,29 +1,51 @@
 {
   "name": "paisley",
   "displayName": "Paisley",
-  "description": "Syntax highlighter and snippets for the Paisley scripting language.",
-  "version": "0.0.2",
-  "publisher": "senor-cluckens",
+  "description": "Syntax highlighter and language support for the Paisley scripting language.",
+  "version": "1.1.0",
+  "license": "GPL-3",
+  "publisher": "Zachary Westerman",
   "engines": {
-    "vscode": ">=1.80.0"
+    "vscode": "^1.75.0"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ZacharyWesterman/paisley-vscode.git"
+  },
+  "activationEvents": [
+    "onLanguage"
+  ],
+  "main": "./client/out/extension",
   "contributes": {
-    "languages": [{
-      "id": "paisley",
-      "aliases": ["Paisley", "paisley"],
-      "extensions": [".paisley"],
-      "configuration": "./language-configuration.json"
-    }],
-    "grammars": [{
-      "language": "paisley",
-      "scopeName": "source.paisley",
-      "path": "./syntaxes/paisley.tmLanguage.json"
-    }],
-    "snippets": [
+    "languages": [
+      {
+        "id": "paisley",
+        "aliases": [
+          "Paisley",
+          "paisley"
+        ],
+        "extensions": [
+          ".paisley"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
       {
         "language": "paisley",
-        "path": "./snippets/paisley-snippets.json"
+        "scopeName": "source.paisley",
+        "path": "./syntaxes/paisley.tmLanguage.json"
       }
     ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -b",
+    "watch": "tsc -b -w",
+    "postinstall": "cd client && npm install && cd ../server && npm install && cd .."
+  },
+  "devDependencies": {
+    "@types/node": "^20.5.7",
+    "typescript": "^5.2.2"
   }
 }
