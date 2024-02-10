@@ -165,7 +165,7 @@ documents.onDidChangeContent(async (change: TextDocumentChangeEvent<TextDocument
 
       const position: Position = {
         line: parseInt(pos[0]) - 1,
-        character: parseInt(pos[1]) - 1,
+        character: parseInt(pos[1]),
       }
 
       diagnostics.push({
