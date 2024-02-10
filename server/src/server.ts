@@ -21,6 +21,7 @@ import { DebugCommands } from "./debug"
 
 import * as fs from 'fs'
 import { spawn } from 'child_process'
+import * as path from 'path'
 
 // Create a connection for the server, using Node's IPC as a transport.
 // Also include all preview / proposed LSP features.
@@ -32,6 +33,7 @@ const documents: TextDocuments<TextDocument> = new TextDocuments(TextDocument)
 let INSTALLED: boolean = false
 let INSTALL_ATTEMPTED: boolean = false
 let PROGRAM: string = ''
+let LUA: string = 'lua'
 
 function command(command: string, args: string[], opts: any, onoutput: any, input_data: string = ''): Promise<void> {
   return new Promise((resolve, reject) => {
@@ -64,6 +66,27 @@ function command(command: string, args: string[], opts: any, onoutput: any, inpu
     process.stdin.write(input_data)
     process.stdin.end()
   })
+}
+
+function is_in_path(program_name: string): boolean {
+    // Get the PATH environment variable
+    const pathVar = process.env.PATH || ''
+
+    // Split the PATH variable into individual directories
+    const pathDirs = pathVar.split(path.delimiter)
+
+    // Iterate through each directory in PATH
+    for (const dir of pathDirs) {
+        // Construct the full path to the program
+        const fullPath = path.join(dir, program_name)
+
+        // Check if the program file exists
+        if (fs.existsSync(fullPath)) {
+            return true
+        }
+    }
+
+    return false
 }
 
 async function install_compiler() {
@@ -100,6 +123,13 @@ async function install_compiler() {
     return
   }
 
+  if (is_in_path('lua.exe')) {
+    LUA = 'lua.exe'
+  } else if (!is_in_path('lua')) {
+    connection.sendNotification('error', 'Lua is not installed!')
+    return
+  }
+
   INSTALLED = true
   connection.sendNotification('hide-status')
 }
@@ -123,19 +153,19 @@ documents.onDidChangeContent(async (change: TextDocumentChangeEvent<TextDocument
     let diagnostics: Diagnostic[] = await DebugCommands.parse(change.document);
     const text = change.document.getText()
 
-    let cmds: string[] = []
+    let cmds: string[] = [PROGRAM]
     DebugCommands.commandTypes.forEach((value: String, key: String) => {
       cmds.push(`-c${key}:${value}`)
     })
 
-    command(PROGRAM, cmds, {timeout: 2000}, (line: string) => {
+    command(LUA, cmds, {timeout: 2000}, (line: string) => {
       const index = line.indexOf(':')
       const pos = line.substring(0, index).split(', ')
       const message = line.substring(index + 2)
 
       const position: Position = {
         line: parseInt(pos[0]) - 1,
-        character: parseInt(pos[1]),
+        character: parseInt(pos[1]) - 1,
       }
 
       diagnostics.push({
