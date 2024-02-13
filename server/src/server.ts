@@ -153,26 +153,27 @@ documents.onDidChangeContent(async (change: TextDocumentChangeEvent<TextDocument
     let diagnostics: Diagnostic[] = await DebugCommands.parse(change.document);
     const text = change.document.getText()
 
-    let cmds: string[] = [PROGRAM]
+    let cmds: string[] = [PROGRAM, '--language-server', '-']
     DebugCommands.commandTypes.forEach((value: String, key: String) => {
       cmds.push(`-c${key}:${value}`)
     })
 
     command(LUA, cmds, {timeout: 2000}, (line: string) => {
-      const index = line.indexOf(':')
-      const pos = line.substring(0, index).split(', ')
+      const index = line.indexOf('|')
+      const pos = line.substring(0, index).split(',').map((x: string) => parseInt(x))
       const message = line.substring(index + 2)
-
-      const position: Position = {
-        line: parseInt(pos[0]) - 1,
-        character: parseInt(pos[1]),
-      }
 
       diagnostics.push({
         severity: DiagnosticSeverity.Error,
         range: {
-          start: position,
-          end: position,
+          start: {
+            line: pos[0],
+            character: pos[1],
+          },
+          end: {
+            line: pos[2],
+            character: pos[3],
+          },
         },
         message: message,
         source: 'Paisley',
