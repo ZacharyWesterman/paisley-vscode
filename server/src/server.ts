@@ -161,7 +161,7 @@ documents.onDidChangeContent(async (change: TextDocumentChangeEvent<TextDocument
     command(LUA, cmds, {timeout: 2000}, (line: string) => {
       const index = line.indexOf('|')
       const pos = line.substring(0, index).split(',').map((x: string) => parseInt(x))
-      const message = line.substring(index + 2)
+      const message = line.substring(index + 1)
 
       diagnostics.push({
         severity: DiagnosticSeverity.Error,
