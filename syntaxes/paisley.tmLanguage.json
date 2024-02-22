@@ -145,9 +145,10 @@
 			"begin": "{",
 			"end": "}",
 			"patterns": [
+				{ "include": "#comments" },
 				{
 					"name": "keyword.paisley",
-					"match": "\\b(in|exists|like|and|or|not|xor)\\b|\\*|\\+|=|/|%|!=|~=|<|>|#|:|\\-"
+					"match": "\\b(in|exists|like|and|or|not|xor)\\b|\\*|\\+|=|/|%|!=|~=|<|>|&|:|\\-"
 				},
 				{
 					"name": "support.class.paisley",
