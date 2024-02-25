@@ -50,9 +50,9 @@ function command(command: string, args: string[], opts: any, onoutput: any, inpu
     //   })
     // })
 
-    process.on('error', err => {
-      reject(err)
-    })
+    // process.on('error', err => {
+    //   reject(err)
+    // })
 
     process.on('close', () => {
       resolve()
@@ -158,7 +158,7 @@ documents.onDidChangeContent(async (change: TextDocumentChangeEvent<TextDocument
       cmds.push(`-c${key}:${value}`)
     })
 
-    command(LUA, cmds, {timeout: 2000}, (line: string) => {
+    command(LUA, cmds, {cwd: __dirname + '/build', timeout: 2000}, (line: string) => {
       const index = line.indexOf('|')
       const pos = line.substring(0, index).split(',').map((x: string) => parseInt(x))
       const message = line.substring(index + 1)
