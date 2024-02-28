@@ -214,6 +214,14 @@
 			"end": "}",
 			"patterns": [
 				{
+					"name": "keyword.control.paisley",
+					"match": "(?<=\\{)[ \\t]*gosub\\b"
+				},
+				{
+					"name": "support.class.paisley",
+					"match": "(?<=\\{[ \\t]*gosub)[ \\t]+[^'\"\\$\\{\\} \\t]+"
+				},
+				{
 					"name": "variable.language.paisley",
 					"match": "(?<=\\{)[ \\t]*[^'\"\\$\\{\\} \\t]+"
 				},
