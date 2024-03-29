@@ -159,12 +159,19 @@ documents.onDidChangeContent(async (change: TextDocumentChangeEvent<TextDocument
     })
 
     command(LUA, cmds, {cwd: __dirname + '/build', timeout: 2000}, (line: string) => {
+      const p1 = line.indexOf(',')
+      const message_type = line.substring(0, p1)
       const index = line.indexOf('|')
-      const pos = line.substring(0, index).split(',').map((x: string) => parseInt(x))
+      const pos = line.substring(p1 + 1, index).split(',').map((x: string) => parseInt(x))
       const message = line.substring(index + 1)
 
       diagnostics.push({
-        severity: DiagnosticSeverity.Error,
+        severity: {
+          'E': DiagnosticSeverity.Error,
+          'W': DiagnosticSeverity.Warning,
+          'H': DiagnosticSeverity.Hint,
+          'I': DiagnosticSeverity.Information,
+        }[message_type],
         range: {
           start: {
             line: pos[0],
