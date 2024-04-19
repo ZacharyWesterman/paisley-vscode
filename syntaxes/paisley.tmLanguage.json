@@ -126,10 +126,7 @@
 			"begin": "\"",
 			"end": "\"",
 			"patterns": [
-				{
-					"name": "constant.character.escape.paisley",
-					"match": "\\\\."
-				},
+				{ "include": "#escape_sequences" },
 				{ "include": "#expressions" },
 				{ "include": "#inline_commands" }
 			]
@@ -139,9 +136,14 @@
 			"begin": "'",
 			"end": "'",
 			"patterns": [
+				{ "include": "#escape_sequences" }
+			]
+		},
+		"escape_sequences": {
+			"patterns": [
 				{
 					"name": "constant.character.escape.paisley",
-					"match": "\\\\."
+					"match": "\\\\(n|t|\"|'|\\\\|r| |\\{|\\}|\\^\\-\\^|:relaxed:|:P|:yum:|<3|:heart_eyes:|B\\)|:sunglasses:|:D|:grinning:|\\^o\\^|:smile:|XD|:laughing:|:lol:|=D|:smiley:|:sweat_smile:|DX|:tired_face:|;P|:stuck_out_tongue_winking_eye:|:-\\*|;-\\*|:kissing_heart:|:kissing:|:rofl:|:\\)|:slight_smile:|:\\(|:frown:|:frowning:)"
 				}
 			]
 		},
