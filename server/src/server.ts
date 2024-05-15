@@ -100,19 +100,23 @@ async function install_compiler() {
       await command('git', ['clone', 'https://github.com/ZacharyWesterman/paisley.git', dir], {}, () => {})
       try { fs.statSync(dir) }
       catch (e) {
-        connection.sendNotification('error', 'Failed to clone Aglet compiler')
+        connection.sendNotification('error', 'Failed to clone Paisley compiler')
         connection.sendNotification('hide-status')
         return
       }
     } catch (e) {
-      connection.sendNotification('error', 'Failed to install Aglet compiler')
+      connection.sendNotification('error', 'Failed to install Paisley compiler')
       connection.sendNotification('hide-status')
       return
     }
   }
 
   connection.sendNotification('status', 'Checking for updates...')
-  await command('git', ['pull'], {cwd: dir}, () => {})
+  try {
+    await command('git', ['pull'], {cwd: dir}, () => {})
+  } catch (_) {
+    connection.sendNotification('status', 'Failed to run git pull.')
+  }
 
   //Final check to make sure that the install went through ok.
   PROGRAM = dir + '/paisley'
