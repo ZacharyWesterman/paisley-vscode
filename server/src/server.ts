@@ -36,8 +36,6 @@ let PROGRAM: string = ''
 let LUA: string = 'lua'
 
 function command(command: string, args: string[], opts: any, onoutput: any, input_data: string = ''): Promise<void> {
-  connection.sendNotification('error', args.toString())
-
 
   return new Promise((resolve, reject) => {
     const process = spawn(command, args, opts)
