@@ -36,6 +36,9 @@ let PROGRAM: string = ''
 let LUA: string = 'lua'
 
 function command(command: string, args: string[], opts: any, onoutput: any, input_data: string = ''): Promise<void> {
+  connection.sendNotification('error', args.toString())
+
+
   return new Promise((resolve, reject) => {
     const process = spawn(command, args, opts)
     process.stdout.on('data', data => {
@@ -43,12 +46,6 @@ function command(command: string, args: string[], opts: any, onoutput: any, inpu
         if (line) onoutput(line)
       })
     })
-
-    // process.stderr.on('data', data => {
-    //   data.toString().split('\n').forEach((line: string) => {
-    //     if (line) onoutput(line)
-    //   })
-    // })
 
     // process.on('error', err => {
     //   reject(err)
@@ -119,15 +116,16 @@ async function install_compiler() {
   }
 
   //Final check to make sure that the install went through ok.
-  PROGRAM = dir + '/paisley'
+  PROGRAM = 'paisley'
   try {
-    await fs.promises.access(PROGRAM, fs.constants.F_OK)
+    await fs.promises.access(dir + '/' + PROGRAM, fs.constants.F_OK)
   } catch (_) {
     connection.sendNotification('error', 'Failed to fetch Paisley compiler')
     return
   }
 
   if (is_in_path('lua.exe')) {
+    PROGRAM = dir + '/' + PROGRAM
     LUA = 'lua.exe'
   } else if (!is_in_path('lua')) {
     connection.sendNotification('error', 'Lua is not installed!')
