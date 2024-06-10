@@ -5,14 +5,9 @@ import {
   InitializeParams,
   TextDocumentSyncKind,
   InitializeResult,
-  CompletionItem,
-  CompletionItemKind,
-  TextDocumentPositionParams,
   Diagnostic,
   DiagnosticSeverity,
-  MarkupContent,
   TextDocumentChangeEvent,
-  Position,
 } from "vscode-languageserver/node"
 
 import { TextDocument } from "vscode-languageserver-textdocument"
