@@ -145,7 +145,9 @@ documents.onDidChangeContent(async (change: TextDocumentChangeEvent<TextDocument
   }
 
   if (INSTALLED) {
-    let diagnostics: Diagnostic[] = await DebugCommands.parse(change.document);
+    let diagnostics: Diagnostic[] = await DebugCommands.parse(change.document)
+    let dead_code: number[] = []
+
     const text = change.document.getText()
 
     let cmds: string[] = [PROGRAM, '--language-server', '-']
@@ -159,6 +161,14 @@ documents.onDidChangeContent(async (change: TextDocumentChangeEvent<TextDocument
       const index = line.indexOf('|')
       const pos = line.substring(p1 + 1, index).split(',').map((x: string) => parseInt(x))
       const message = line.substring(index + 1)
+
+      if (message_type === 'D')
+      {
+        dead_code.push(...pos)
+        return
+      }
+
+      if (!['E', 'W', 'H', 'I'].includes(message_type)) return
 
       diagnostics.push({
         severity: {
@@ -182,6 +192,7 @@ documents.onDidChangeContent(async (change: TextDocumentChangeEvent<TextDocument
       })
     }, text).then(() => {
       connection.sendDiagnostics({ uri: change.document.uri, diagnostics })
+      connection.sendNotification('dead_code', dead_code)
     })
   }
 })
