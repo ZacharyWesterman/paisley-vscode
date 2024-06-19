@@ -40,9 +40,9 @@ function command(command: string, args: string[], opts: any, onoutput: any, inpu
       })
     })
 
-    // process.on('error', err => {
-    //   reject(err)
-    // })
+    process.stderr.on('data', data => {
+      connection.sendNotification('error', `${data}`)
+    })
 
     process.on('close', () => {
       resolve()
@@ -150,7 +150,20 @@ documents.onDidChangeContent(async (change: TextDocumentChangeEvent<TextDocument
 
     const text = change.document.getText()
 
-    let cmds: string[] = [PROGRAM, '--language-server', '-']
+    let file_path = change.document.uri.replace('file://', '')
+
+    const workspaces = await connection.workspace.getWorkspaceFolders()
+    if (workspaces !== null) {
+      for (let i of workspaces) {
+        const path = i.uri.replace('file://', '') + '/'
+        if (file_path.startsWith(path)) {
+          file_path = file_path.substring(path.length)
+          break
+        }
+      }
+    }
+
+    let cmds: string[] = [PROGRAM, '--language-server', `--stdin=${file_path}`, '-']
     DebugCommands.commandTypes.forEach((value: String, key: String) => {
       cmds.push(`-c${key}:${value}`)
     })
