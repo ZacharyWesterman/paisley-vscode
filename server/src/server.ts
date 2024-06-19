@@ -41,7 +41,7 @@ function command(command: string, args: string[], opts: any, onoutput: any, inpu
     })
 
     process.stderr.on('data', data => {
-      connection.sendNotification('error', `${data}`)
+      // connection.sendNotification('error', `${data}`)
     })
 
     process.on('close', () => {
