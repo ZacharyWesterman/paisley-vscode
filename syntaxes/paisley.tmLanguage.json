@@ -71,7 +71,7 @@
 		"keywords": {
 			"patterns": [{
 				"name": "keyword.control.paisley",
-				"match": "\\b(for|while|in|do|if|then|elif|else|end|continue|break|subroutine|gosub|return|stop|define)\\b"
+				"match": "\\b(for|while|in|do|if|then|elif|else|end|continue|break|subroutine|gosub|return|stop|define|require)\\b"
 			}, {
 				"name": "meta.var_delete.paisley",
 				"match": "\\b(delete)(([ \\t]+[a-zA-Z_]\\w*)+)",
