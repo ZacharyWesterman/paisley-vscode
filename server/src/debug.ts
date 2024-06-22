@@ -23,7 +23,7 @@ export const DebugCommands = {
 		this.commandBodies = new Map<String, Array<Function>>()
 
 		let text = document.getText()
-		let pattern = /(#![ \t]*DEBUG[ \t]+)([^:,#; \t]+)\b(.*?\bEND\b)?/g
+		let pattern = /(#@[ \t]*DEBUG[ \t]+)([^:,#; \t]+)\b(.*?\bEND\b)?/ig
 		let m: RegExpExecArray | null
 
 		const builtInCommands = ['print', 'sleep', 'time', 'systime', 'sysdate', 'error']
@@ -56,7 +56,7 @@ export const DebugCommands = {
 					start: document.positionAt(m.index + m[1].length),
 					end: document.positionAt(m.index + m[1].length + m[2].length)
 					},
-					message: `Consider specifying the return type in a #!COMMANDS comment.`,
+					message: `Consider specifying the return type in a #@COMMANDS comment.`,
 					source: 'Paisley',
 				})
 
@@ -113,18 +113,18 @@ export const DebugCommands = {
 		this.commandTypes = new Map<String, String>()
 
 		let text = document.getText()
-		let pattern = /(#![ \\t]*COMMANDS)\b.*/g
+		let pattern = /(#@[ \\t]*COMMANDS)\b.*/ig
 		let m: RegExpExecArray | null
 
 		const builtInCommands = ['print', 'sleep', 'time', 'systime', 'sysdate', 'error']
-		const returnTypes = ['null', 'boolean', 'number', 'string', 'array', 'any']
+		const returnTypes = ['null', 'boolean', 'number', 'string', 'array', 'array[string]', 'array[number]', 'any']
 
 		let problems = 0
 		let diagnostics: Diagnostic[] = []
 		while ((m = pattern.exec(text)) && problems < this.maxProblems)
 		{
 			let line = m[0].substring(m[1].length)
-			let c_pattn = /\b[^:,#; \t]+\b|[:;#]/g
+			let c_pattn = /\b[^:,#; \t]+|[:;#]/g
 			let cmd: RegExpExecArray | null
 
 			let check_return_type = false

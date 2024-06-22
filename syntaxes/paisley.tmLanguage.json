@@ -4,8 +4,8 @@
 	"patterns": [
 		{
 			"name": "comment.line.debug.paisley",
-			"begin": "#![ \\t]*(DEBUG)[ \\t]+(\\w+)",
-			"end": "\\b(END)\\b",
+			"begin": "(?i)#+[ \\t]*(@DEBUG)[ \\t]+(\\w+)",
+			"end": "(?i)\\b(END)\\b",
 			"captures": {
 				"1": { "name": "keyword.control.paisley" },
 				"2": { "name": "keyword.paisley" },
@@ -15,12 +15,12 @@
 		},
 		{
 			"name": "comment.line.debug.paisley",
-			"begin": "#!",
+			"begin": "(?i)#+[ \\t]*(?=@COMMANDS\\b)",
 			"end": "$",
 			"patterns": [
 				{
 					"name": "keyword.control.paisley",
-					"begin": "(?<=#!)[ \\t]*COMMANDS\\b",
+					"begin": "(?i)@COMMANDS\\b",
 					"end": "$",
 					"patterns": [
 						{
@@ -30,15 +30,15 @@
 						},
 						{
 							"name": "keyword.paisley",
-							"match": "(?<!:)[ \\t]*\\b[^:, \\t'\"\\{\\};]+"
+							"match": "(?<!:)[ \\t]*[^:, \\t'\";#]+"
 						},
 						{
 							"name": "keyword.paisley",
-							"match": "(?<=:)[ \\t]*(null|boolean|number|string|array|any)\\b"
+							"match": "(?<=:)[ \\t]*(null|boolean|number|string|array(\\[(string|number)\\])?|any)\\b"
 						},
 						{
 							"name": "invalid.illegal.bad_return_value.paisley",
-							"match": "(?<=:)[ \\t]*[^:, \\t'\"\\{\\};]+"
+							"match": "(?<=:)[ \\t]*[^:, \\t'\";]+"
 						},
 						{
 							"name": "comment.line.ignore.paisley",
@@ -65,7 +65,12 @@
 		"comments": {
 			"patterns": [{
 				"name": "comment.line.number-sign.paisley",
-				"match": "#.*\n?"
+				"begin": "#",
+				"end": "$",
+				"patterns": [{
+					"name": "keyword.control.paisley",
+					"match": "@export\\b"
+				}]
 			}]
 		},
 		"keywords": {
