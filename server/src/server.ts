@@ -152,6 +152,7 @@ documents.onDidChangeContent(async (change: TextDocumentChangeEvent<TextDocument
 
     let file_path = change.document.uri.replace('file://', '')
 
+    /*
     const workspaces = await connection.workspace.getWorkspaceFolders()
     if (workspaces !== null) {
       for (let i of workspaces) {
@@ -162,6 +163,7 @@ documents.onDidChangeContent(async (change: TextDocumentChangeEvent<TextDocument
         }
       }
     }
+    */
 
     let cmds: string[] = [PROGRAM, '--language-server', `--stdin=${file_path}`, '-']
     DebugCommands.commandTypes.forEach((value: String, key: String) => {
