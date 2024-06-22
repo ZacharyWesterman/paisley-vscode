@@ -69,7 +69,7 @@
 				"end": "$",
 				"patterns": [{
 					"name": "keyword.control.paisley",
-					"match": "@export\\b"
+					"match": "(?i)@export\\b"
 				}]
 			}]
 		},
