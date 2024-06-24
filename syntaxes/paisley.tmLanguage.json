@@ -108,7 +108,7 @@
 
 			{
 				"name": "entity.name.variable.paisley",
-				"match": "(?<=\\bfor)[ \\t]+[a-zA-Z_]\\w*[ \\t]+\\b"
+				"match": "(?<=\\bfor)([ \\t]+[a-zA-Z_]\\w*)+[ \\t]+\\b"
 			},
 
 			{
