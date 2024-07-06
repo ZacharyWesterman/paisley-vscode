@@ -150,7 +150,7 @@ documents.onDidChangeContent(async (change: TextDocumentChangeEvent<TextDocument
 
     const text = change.document.getText()
 
-    let file_path = change.document.uri.replace('file://', '')
+    let file_path = change.document.uri.replace('file://', '').replace('/c%3A', 'C:')
 
     /*
     const workspaces = await connection.workspace.getWorkspaceFolders()

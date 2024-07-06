@@ -1,7 +1,7 @@
 {
   "name": "paisley",
   "description": "Language support for Paisley.",
-  "version": "1.2.0",
+  "version": "1.2.2",
   "author": "Zachary Westerman",
   "license": "GPL-3",
   "engines": {
