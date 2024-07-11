@@ -103,7 +103,7 @@
 		"commands": {
 			"patterns": [{
 				"name": "variable.language.command.paisley",
-				"match": "(^|(?<=\\bdo\\b|\\bthen\\b|;|\\bend\\b|\\belse\\b))[ \\t]*(?!(for|while|in|do|if|then|elif|else|end|continue|break|subroutine|gosub|return|stop|delete|let|initial|define|require|match)\\b)[^'\"\\$\\{\\} \\t#]+"
+				"match": "(^|(?<=\\bdo\\b|\\bthen\\b|;|\\bend\\b|\\belse\\b|\\bsubroutine[ \\t]+[^'\"\\$\\{\\} \\t#;]+))[ \\t]*(?!(for|while|in|do|if|then|elif|else|end|continue|break|subroutine|gosub|return|stop|delete|let|initial|define|require|match)\\b)[^'\"\\$\\{\\} \\t#;]+"
 			},
 
 			{
@@ -119,10 +119,10 @@
 		"labels": {
 			"patterns": [{
 				"name": "support.class.paisley",
-				"match": "(?<=subroutine)[ \\t]+[^'\"\\$\\{\\} \\t#]+"
+				"match": "(?<=subroutine)[ \\t]+[^'\"\\$\\{\\} \\t#;]+"
 			}, {
 				"name": "support.class.paisley",
-				"match": "(?<=gosub)[ \\t]+[^'\"\\$\\{\\} \\t#]+"
+				"match": "(?<=gosub)[ \\t]+[^'\"\\$\\{\\} \\t#;]+"
 			}]
 		},
 
