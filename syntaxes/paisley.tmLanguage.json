@@ -69,7 +69,14 @@
 				"end": "$",
 				"patterns": [{
 					"name": "keyword.control.paisley",
-					"match": "(?i)@export\\b"
+					"match": "(?i)@(export|brief)\\b"
+				}, {
+					"name": "keyword.control.paisley",
+					"match": "(?i)(@param|@return)\\b[ \t]*([^ \t]+)",
+					"captures": {
+						"1": { "name": "keyword.control.paisley" },
+						"2": { "name": "support.class.paisley" }
+					}
 				}]
 			}]
 		},
