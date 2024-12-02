@@ -5,13 +5,23 @@
 		{
 			"name": "comment.line.debug.paisley",
 			"begin": "(?i)#+[ \\t]*(@DEBUG)[ \\t]+(\\w+)",
-			"end": "(?i)\\b(END)\\b",
+			"end": "(?i)(@END)\\b",
 			"captures": {
-				"1": { "name": "keyword.control.paisley" },
-				"2": { "name": "keyword.paisley" },
-				"3": { "name": "keyword.control.paisley" }
+				"1": {
+					"name": "keyword.control.paisley"
+				},
+				"2": {
+					"name": "keyword.paisley"
+				},
+				"3": {
+					"name": "keyword.control.paisley"
+				}
 			},
-			"patterns": [{ "include": "source.js" }]
+			"patterns": [
+				{
+					"include": "source.lua"
+				}
+			]
 		},
 		{
 			"name": "comment.line.debug.paisley",
@@ -48,14 +58,30 @@
 				}
 			]
 		},
-		{ "include": "#comments" },
-		{ "include": "#keywords" },
-		{ "include": "#commands" },
-		{ "include": "#labels" },
-		{ "include": "#strings" },
-		{ "include": "#strings2" },
-		{ "include": "#expressions" },
-		{ "include": "#inline_commands" },
+		{
+			"include": "#comments"
+		},
+		{
+			"include": "#keywords"
+		},
+		{
+			"include": "#commands"
+		},
+		{
+			"include": "#labels"
+		},
+		{
+			"include": "#strings"
+		},
+		{
+			"include": "#strings2"
+		},
+		{
+			"include": "#expressions"
+		},
+		{
+			"include": "#inline_commands"
+		},
 		{
 			"name": "comment.line.semicolon.paisley",
 			"match": ";"
@@ -63,84 +89,139 @@
 	],
 	"repository": {
 		"comments": {
-			"patterns": [{
-				"name": "comment.line.number-sign.paisley",
-				"begin": "#",
-				"end": "$",
-				"patterns": [{
-					"name": "keyword.control.paisley",
-					"match": "(?i)@(export|brief)\\b"
-				}, {
-					"name": "keyword.control.paisley",
-					"match": "(?i)(@param|@return)\\b[ \t]*([^ \t]+)",
-					"captures": {
-						"1": { "name": "keyword.control.paisley" },
-						"2": { "name": "support.class.paisley" }
-					}
-				}]
-			}]
+			"patterns": [
+				{
+					"name": "comment.line.number-sign.paisley",
+					"begin": "#",
+					"end": "$",
+					"patterns": [
+						{
+							"name": "keyword.control.paisley",
+							"match": "(?i)@(export|brief)\\b"
+						},
+						{
+							"name": "keyword.control.paisley",
+							"match": "(?i)(@param)\\b[ \t]*([^ \t]+)[ \t]*([^ \t]+)",
+							"captures": {
+								"1": {
+									"name": "keyword.control.paisley"
+								},
+								"2": {
+									"name": "entity.name.variable.paisley"
+								},
+								"3": {
+									"name": "support.class.paisley"
+								}
+							}
+						},
+						{
+							"name": "keyword.control.paisley",
+							"match": "(?i)(@return)\\b[ \t]*([^ \t]+)",
+							"captures": {
+								"1": {
+									"name": "keyword.control.paisley"
+								},
+								"2": {
+									"name": "support.class.paisley"
+								}
+							}
+						},
+						{
+							"name": "keyword.control.paisley",
+							"match": "(?i)(@mutate)\\b[ \t]*([^ \t]+)",
+							"captures": {
+								"1": {
+									"name": "keyword.control.paisley"
+								},
+								"2": {
+									"name": "entity.name.variable.paisley"
+								}
+							}
+						}
+					]
+				}
+			]
 		},
 		"keywords": {
-			"patterns": [{
-				"name": "keyword.control.paisley",
-				"match": "\\b(for|while|in|do|if|then|elif|else|end|continue|break|subroutine|gosub|return|stop|define|require|match)\\b"
-			}, {
-				"name": "meta.var_delete.paisley",
-				"match": "\\b(delete)(([ \\t]+[a-zA-Z_]\\w*)+)",
-				"captures": {
-					"1": { "name": "keyword.control.paisley" },
-					"2": { "name": "entity.name.variable.paisley" }
-				}
-			}, {
-				"name": "keyword.control.paisley",
-				"match": "\\b(delete)\\b[ \\t]*(?![a-zA-Z_])"
-			}, {
-				"name": "keyword.control.paisley",
-				"begin": "\\b(let|initial)\\b",
-				"end": "=|$|(?=[;#])",
-				"patterns": [
-					{ "include": "#expressions" },
-					{
-						"name": "entity.name.variable.paisley",
-						"match": "\\b[a-zA-Z_]\\w*\\b(?![ \\t]*\\()"
+			"patterns": [
+				{
+					"name": "keyword.control.paisley",
+					"match": "\\b(for|while|in|do|if|then|elif|else|end|continue|break|cache|subroutine|gosub|return|stop|define|require|match)\\b"
+				},
+				{
+					"name": "meta.var_delete.paisley",
+					"match": "\\b(delete)(([ \\t]+[a-zA-Z_]\\w*)+)",
+					"captures": {
+						"1": {
+							"name": "keyword.control.paisley"
+						},
+						"2": {
+							"name": "entity.name.variable.paisley"
+						}
 					}
-				]
-			}]
+				},
+				{
+					"name": "keyword.control.paisley",
+					"match": "\\b(delete)\\b[ \\t]*(?![a-zA-Z_])"
+				},
+				{
+					"name": "keyword.control.paisley",
+					"begin": "\\b(let|initial)\\b",
+					"end": "=|$|(?=[;#])",
+					"patterns": [
+						{
+							"include": "#expressions"
+						},
+						{
+							"name": "entity.name.variable.paisley",
+							"match": "\\b[a-zA-Z_]\\w*\\b(?![ \\t]*\\()"
+						}
+					]
+				}
+			]
 		},
 		"commands": {
-			"patterns": [{
-				"name": "variable.language.command.paisley",
-				"match": "(^|(?<=\\bdo\\b|\\bthen\\b|;|\\bend\\b|\\belse\\b|\\bsubroutine[ \\t]+[^'\"\\$\\{\\} \\t#;]+))[ \\t]*(?!(for|while|in|do|if|then|elif|else|end|continue|break|subroutine|gosub|return|stop|delete|let|initial|define|require|match)\\b)[^'\"\\$\\{\\} \\t#;]+"
-			},
-
-			{
-				"name": "entity.name.variable.paisley",
-				"match": "(?<=\\bfor)([ \\t]+[a-zA-Z_]\\w*)+[ \\t]+\\b"
-			},
-
-			{
-				"name": "constant.numeric.paisley",
-				"match": "(?<=[ \\t])-?[0-9\\.]+\\b"
-			}]
+			"patterns": [
+				{
+					"name": "variable.language.command.paisley",
+					"match": "(^|(?<=\\bdo\\b|\\bthen\\b|;|\\bend\\b|\\belse\\b|\\bsubroutine[ \\t]+[^'\"\\$\\{\\} \\t#;]+))[ \\t]*(?!(for|while|in|do|if|then|elif|else|end|continue|break|subroutine|gosub|return|stop|delete|let|initial|define|require|match)\\b)[^'\"\\$\\{\\} \\t#;]+"
+				},
+				{
+					"name": "entity.name.variable.paisley",
+					"match": "(?<=\\bfor)([ \\t]+[a-zA-Z_]\\w*)+[ \\t]+\\b"
+				},
+				{
+					"name": "constant.numeric.paisley",
+					"match": "(?<=[ \\t])-?[0-9\\.]+\\b"
+				}
+			]
 		},
 		"labels": {
-			"patterns": [{
-				"name": "support.class.paisley",
-				"match": "(?<=subroutine)[ \\t]+[^'\"\\$\\{\\} \\t#;]+"
-			}, {
-				"name": "support.class.paisley",
-				"match": "(?<=gosub)[ \\t]+[^'\"\\$\\{\\} \\t#;]+"
-			}]
+			"patterns": [
+				{
+					"name": "support.class.paisley",
+					"match": "(?<=subroutine)[ \\t]+[^'\"\\$\\{\\} \\t#;]+"
+				},
+				{
+					"name": "support.class.paisley",
+					"match": "(?<=gosub)[ \\t]+[^'\"\\$\\{\\} \\t#;]+"
+				}
+			]
 		},
-
 		"strings": {
 			"name": "string.interpolated.paisley",
 			"begin": "\"",
 			"end": "\"",
 			"patterns": [
-				{ "include": "#escape_sequences" },
-				{ "include": "#expressions" },
-				{ "include": "#inline_commands" }
+				{
+					"include": "#escape_sequences"
+				},
+				{
+					"include": "#expressions"
+				},
+				{
+					"include": "#inline_commands"
+				}
 			]
 		},
 		"strings2": {
@@ -148,7 +229,9 @@
 			"begin": "'",
 			"end": "'",
 			"patterns": [
-				{ "include": "#escape_sequences" }
+				{
+					"include": "#escape_sequences"
+				}
 			]
 		},
 		"escape_sequences": {
@@ -159,12 +242,13 @@
 				}
 			]
 		},
-
 		"expressions": {
 			"begin": "{",
 			"end": "}",
 			"patterns": [
-				{ "include": "#comments" },
+				{
+					"include": "#comments"
+				},
 				{
 					"name": "keyword.paisley",
 					"match": "\\b(in|exists|like|and|or|not|xor)\\b|\\*|\\+|=|/|%|!=|~=|<|>|&|:|\\-"
@@ -181,33 +265,36 @@
 					"name": "meta.list_comp.paisley",
 					"match": "\\b(for)([ \\t]+[a-zA-Z_]\\w*[ \\t]+)(in)\\b",
 					"captures": {
-						"1": { "name": "keyword.control.paisley" },
-						"2": { "name": "entity.name.variable.paisley" },
-						"3": { "name": "keyword.control.paisley" }
+						"1": {
+							"name": "keyword.control.paisley"
+						},
+						"2": {
+							"name": "entity.name.variable.paisley"
+						},
+						"3": {
+							"name": "keyword.control.paisley"
+						}
 					}
 				},
 				{
 					"name": "keyword.control.paisley",
 					"match": "\\bfor\\b(?![ \\t]+[a-zA-Z_]\\w*[ \\t]+in\\b)"
 				},
-
 				{
 					"name": "constant.language.paisley",
 					"match": "\\b(true|false|null)\\b"
 				},
-
 				{
 					"name": "entity.name.variable.paisley",
 					"match": "\\b[a-zA-Z_]\\w*\\b(?![ \\t]*\\()"
 				},
-
-				{ "include": "#inline_commands" },
-
+				{
+					"include": "#inline_commands"
+				},
 				{
 					"name": "variable.language.paisley",
-					"match": "\\$|@"
+					"match": "\\$|@[0-9]*"
 				},
-
 				{
 					"name": "constant.numeric.paisley",
 					"match": "\\b(0x[0-9a-fA-F_]*|0b[01_]*|[0-9][0-9_]*(\\.[0-9_]+)?|\\.[0-9][0-9_]*)\\b"
@@ -216,18 +303,21 @@
 					"name": "invalid.illegal.bad_number.paisley",
 					"match": "\\b([0-9][0-9a-zA-Z_]*)\\b"
 				},
-
 				{
 					"name": "entity.name.function.paisley",
 					"match": "(\\.[ \\t]*)?\\b[a-zA-Z_]\\w*(?=[ \\t]*\\()\\b"
 				},
-
-				{ "include": "#strings" },
-				{ "include": "#strings2" },
-				{ "include": "#expressions" }
+				{
+					"include": "#strings"
+				},
+				{
+					"include": "#strings2"
+				},
+				{
+					"include": "#expressions"
+				}
 			]
 		},
-
 		"inline_commands": {
 			"begin": "\\${",
 			"end": "}",
@@ -244,16 +334,22 @@
 					"name": "variable.language.paisley",
 					"match": "(?<=\\{)[ \\t]*[^'\"\\$\\{\\} \\t#]+"
 				},
-
 				{
 					"name": "constant.numeric.paisley",
 					"match": "(?<=[ \\t])-?[0-9\\.]+\\b"
 				},
-
-				{ "include": "#strings" },
-				{ "include": "#strings2" },
-				{ "include": "#expressions" },
-				{ "include": "#inline_commands" }
+				{
+					"include": "#strings"
+				},
+				{
+					"include": "#strings2"
+				},
+				{
+					"include": "#expressions"
+				},
+				{
+					"include": "#inline_commands"
+				}
 			]
 		}
 	},
