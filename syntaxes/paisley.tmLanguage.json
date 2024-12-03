@@ -200,11 +200,15 @@
 			"patterns": [
 				{
 					"name": "support.class.paisley",
-					"match": "(?<=subroutine)[ \\t]+[^'\"\\$\\{\\} \\t#;]+"
+					"match": "(?<=\\bsubroutine)[ \\t]+[^'\"\\$\\{\\} \\t#;]+"
 				},
 				{
 					"name": "support.class.paisley",
-					"match": "(?<=gosub)[ \\t]+[^'\"\\$\\{\\} \\t#;]+"
+					"match": "(?<=\\bgosub)[ \\t]+[^'\"\\$\\{\\} \\t#;]+"
+				},
+				{
+					"name": "support.class.paisley",
+					"match": "(?<=\\bbreak[ \\t]+cache)[ \\t]+[^'\"\\$\\{\\} \\t#;]+"
 				}
 			]
 		},
