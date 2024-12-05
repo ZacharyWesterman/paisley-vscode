@@ -146,7 +146,7 @@
 			"patterns": [
 				{
 					"name": "keyword.control.paisley",
-					"match": "\\b(for|while|in|do|if|then|elif|else|end|continue|break|cache|subroutine|gosub|return|stop|define|require|match)\\b"
+					"match": "\\b(for|while|in|do|if|then|elif|else|end|continue|break|cache|subroutine|gosub|return|stop|define|require|match|using|as)\\b"
 				},
 				{
 					"name": "meta.var_delete.paisley",
