@@ -8,13 +8,13 @@
 			"end": "(?i)(@END)\\b",
 			"captures": {
 				"1": {
-					"name": "keyword.control.paisley"
+					"name": "keyword.paisley"
 				},
 				"2": {
 					"name": "keyword.paisley"
 				},
 				"3": {
-					"name": "keyword.control.paisley"
+					"name": "keyword.paisley"
 				}
 			},
 			"patterns": [
@@ -29,7 +29,7 @@
 			"end": "$",
 			"patterns": [
 				{
-					"name": "keyword.control.paisley",
+					"name": "keyword.paisley",
 					"begin": "(?i)@COMMANDS\\b",
 					"end": "$",
 					"patterns": [
@@ -43,7 +43,7 @@
 							"match": "(?<!:)[ \\t]*[^:, \\t'\";#]+"
 						},
 						{
-							"name": "keyword.paisley",
+							"name": "support.class.paisley",
 							"match": "(?<=:)[ \\t]*(null|boolean|number|string|array(\\[(string|number)\\])?|any)\\b"
 						},
 						{
@@ -96,15 +96,14 @@
 					"end": "$",
 					"patterns": [
 						{
-							"name": "keyword.control.paisley",
+							"name": "keyword.paisley",
 							"match": "(?i)@(export|brief)\\b"
 						},
 						{
-							"name": "keyword.control.paisley",
 							"match": "(?i)(@param)\\b[ \t]*([^ \t]+)[ \t]*([^ \t]+)",
 							"captures": {
 								"1": {
-									"name": "keyword.control.paisley"
+									"name": "keyword.paisley"
 								},
 								"2": {
 									"name": "entity.name.variable.paisley"
@@ -115,11 +114,10 @@
 							}
 						},
 						{
-							"name": "keyword.control.paisley",
 							"match": "(?i)(@return)\\b[ \t]*([^ \t]+)",
 							"captures": {
 								"1": {
-									"name": "keyword.control.paisley"
+									"name": "keyword.paisley"
 								},
 								"2": {
 									"name": "support.class.paisley"
@@ -127,11 +125,10 @@
 							}
 						},
 						{
-							"name": "keyword.control.paisley",
 							"match": "(?i)(@mutate)\\b[ \t]*([^ \t]+)",
 							"captures": {
 								"1": {
-									"name": "keyword.control.paisley"
+									"name": "keyword.paisley"
 								},
 								"2": {
 									"name": "entity.name.variable.paisley"
