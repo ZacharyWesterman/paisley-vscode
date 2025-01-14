@@ -143,7 +143,7 @@
 			"patterns": [
 				{
 					"name": "keyword.control.paisley",
-					"match": "\\b(for|while|in|do|if|then|elif|else|end|continue|break|cache|subroutine|gosub|return|stop|define|require|match|using|as)\\b"
+					"match": "\\b(for|while|in|do|if|then|elif|else|end|continue|break|cache|subroutine|gosub|return|stop|define|require|match|using|as|try|catch)\\b"
 				},
 				{
 					"name": "meta.var_delete.paisley",
@@ -181,7 +181,7 @@
 			"patterns": [
 				{
 					"name": "variable.language.command.paisley",
-					"match": "(^|(?<=\\bdo\\b|\\bthen\\b|;|\\bend\\b|\\belse\\b|\\bsubroutine[ \\t]+[^'\"\\$\\{\\} \\t#;]+))[ \\t]*(?!(for|while|in|do|if|then|elif|else|end|continue|break|subroutine|gosub|return|stop|delete|let|initial|define|require|match|using|as)\\b)[^'\"\\$\\{\\} \\t#;]+"
+					"match": "(^|(?<=\\bdo\\b|\\bthen\\b|;|\\bend\\b|\\belse\\b|\\bsubroutine[ \\t]+[^'\"\\$\\{\\} \\t#;]+))[ \\t]*(?!(for|while|in|do|if|then|elif|else|end|continue|break|subroutine|gosub|return|stop|delete|let|initial|define|require|match|using|as|catch)\\b)[^'\"\\$\\{\\} \\t#;]+"
 				},
 				{
 					"name": "entity.name.variable.paisley",
