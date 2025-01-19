@@ -26,8 +26,13 @@
           "paisley"
         ],
         "extensions": [
-          ".paisley"
+          ".paisley",
+          ".pai"
         ],
+        "icon": {
+          "light": "./images/paisley-logo-mono.png",
+          "dark": "./images/paisley-logo-mono.png"
+        },
         "configuration": "./language-configuration.json"
       }
     ],
