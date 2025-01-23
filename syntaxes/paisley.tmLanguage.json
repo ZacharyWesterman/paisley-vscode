@@ -84,7 +84,7 @@
 		},
 		{
 			"name": "comment.line.semicolon.paisley",
-			"match": ";"
+			"match": "[;\\|<>]"
 		}
 	],
 	"repository": {
@@ -181,7 +181,7 @@
 			"patterns": [
 				{
 					"name": "variable.language.command.paisley",
-					"match": "(^|(?<=\\bdo\\b|\\bthen\\b|;|\\bend\\b|\\belse\\b|\\bsubroutine[ \\t]+[^'\"\\$\\{\\} \\t#;]+))[ \\t]*(?!(for|while|in|do|if|then|elif|else|end|continue|break|subroutine|gosub|return|stop|delete|let|initial|define|require|match|using|as|catch)\\b)[^'\"\\$\\{\\} \\t#;]+"
+					"match": "(^|(?<=\\bdo\\b|\\bthen\\b|[;\\|]|\\bend\\b|\\belse\\b|\\bsubroutine[ \\t]+[^'\"\\$\\{\\} \\t#;]+))[ \\t]*(?!(for|while|in|do|if|then|elif|else|end|continue|break|subroutine|gosub|return|stop|delete|let|initial|define|require|match|using|as|catch)\\b)[^'\"\\$\\{\\} \\t#;]+"
 				},
 				{
 					"name": "entity.name.variable.paisley",
