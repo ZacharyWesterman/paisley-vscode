@@ -5,7 +5,7 @@
   "icon": "images/paisley-logo.png",
   "version": "1.2.10",
   "license": "GPL-3",
-  "publisher": "Zachary Westerman",
+  "publisher": "skrunk",
   "engines": {
     "vscode": "^1.75.0"
   },

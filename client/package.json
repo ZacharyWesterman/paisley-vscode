@@ -4,7 +4,7 @@
   "version": "1.2.5",
   "author": "Zachary Westerman",
   "license": "GPL-3",
-  "publisher": "Zachary Westerman",
+  "publisher": "skrunk",
   "repository": {
     "type": "git",
     "url": "https://github.com/ZacharyWesterman/paisley-vscode.git"
