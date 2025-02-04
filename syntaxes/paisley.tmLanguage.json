@@ -143,7 +143,7 @@
 			"patterns": [
 				{
 					"name": "keyword.control.paisley",
-					"match": "\\b(for|while|in|do|if|then|elif|else|end|continue|break|cache|subroutine|gosub|return|stop|define|require|match|using|as|try|catch)\\b"
+					"match": "\\b(for|while|in|do|if|then|elif|else|end|continue|break|cache|defer|subroutine|gosub|return|stop|define|require|match|using|as|try|catch)\\b"
 				},
 				{
 					"name": "meta.var_delete.paisley",
@@ -307,6 +307,10 @@
 				{
 					"name": "entity.name.function.paisley",
 					"match": "(\\.[ \\t]*)?\\b[a-zA-Z_]\\w*(?=[ \\t]*\\()\\b"
+				},
+				{
+					"name": "entity.name.function.paisley",
+					"match": "\\\\[^'\"\\$\\{\\} \\t#]+(?=[ \\t]*\\()"
 				},
 				{
 					"include": "#strings"
