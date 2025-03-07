@@ -1,7 +1,7 @@
 {
   "name": "paisley",
   "description": "Language support for Paisley.",
-  "version": "1.2.5",
+  "version": "1.2.12",
   "author": "Zachary Westerman",
   "license": "GPL-3",
   "engines": {
@@ -12,7 +12,7 @@
     "url": "https://github.com/ZacharyWesterman/paisley-vscode.git"
   },
   "dependencies": {
-    "vscode-languageserver": "^8.1.0",
-    "vscode-languageserver-textdocument": "^1.0.8"
+    "vscode-languageserver": "^9.0.1",
+    "vscode-languageserver-textdocument": "^1.0.12"
   }
 }
