@@ -97,7 +97,7 @@
 					"patterns": [
 						{
 							"name": "keyword.paisley",
-							"match": "(?i)@(export|brief|shell|plasma|error|private)\\b"
+							"match": "(?i)@(export|brief|shell|plasma|error|private|sandbox)\\b"
 						},
 						{
 							"match": "(?i)(@param)\\b[ \t]*([^ \t]+)[ \t]*([^ \t]+)",
