@@ -7,6 +7,8 @@ cd build || exit 1
 version=v1.15.16
 # Download the paisley compiler for both Linux and Windows
 for i in paisley paisley.exe; do
+    rm -f $i
+
     echo "Downloading $i..."
     url=https://github.com/ZacharyWesterman/paisley/releases/download/$version/$i
     wget $url --quiet || {
