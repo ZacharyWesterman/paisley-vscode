@@ -1,8 +1,12 @@
 # Paisley Grammar and Language Support
 
-This extension provides language support for the [Paisley](https://github.com/ZacharyWesterman/paisley) scripting language, which includes syntax highlighting, syntax validation, typechecking, and hover info for various code entities.
+This extension provides language support for the [Paisley](https://github.com/ZacharyWesterman/paisley) scripting language.
+The current supported version is v1.15.16.
 
-# Dependencies
-
-- Lua 5.1
-- Python 3
+Features include:
+- Syntax highlighting.
+- Syntax validation.
+- Type checking.
+- Hover info for some code entities.
+- Warnings for poorly formed code.
+- Marking dead code blocks.

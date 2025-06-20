@@ -3,7 +3,7 @@
   "displayName": "Paisley",
   "description": "Syntax highlighter and language support for the Paisley scripting language.",
   "icon": "images/paisley-logo.png",
-  "version": "1.2.12",
+  "version": "1.3.0",
   "license": "GPL-3",
   "publisher": "skrunk",
   "engines": {
@@ -45,7 +45,7 @@
     ]
   },
   "scripts": {
-    "vscode:prepublish": "npm run compile",
+    "vscode:prepublish": "npm run compile && ./get_compiler.sh",
     "compile": "tsc -b",
     "watch": "tsc -b -w",
     "postinstall": "cd client && npm install && cd ../server && npm install && cd .."
