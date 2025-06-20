@@ -25,10 +25,7 @@ import {
 
 let client: LanguageClient
 let dead_code: number[] = []
-let resolve_loaded: Function = () => {}
-let loaded = new Promise((resolve: Function) => {
-  resolve_loaded = resolve
-})
+
 const tokenTypes = new Map<string, number>()
 const tokenModifiers = new Map<string, number>()
 
@@ -53,18 +50,6 @@ const legend = (function() {
 // create a decorator type that we use to decorate small numbers
 const smallNumberDecorationType = window.createTextEditorDecorationType({
   opacity: "50%",
-  // borderWidth: '1px',
-  // borderStyle: 'solid',
-  // overviewRulerColor: 'blue',
-  // overviewRulerLane: OverviewRulerLane.Right,
-  // light: {
-  //   // this color will be used in light color themes
-  //   borderColor: 'darkblue'
-  // },
-  // dark: {
-  //   // this color will be used in dark color themes
-  //   borderColor: 'lightblue'
-  // }
 });
 
 
@@ -113,7 +98,6 @@ export function activate(context: ExtensionContext) {
 
   client.onNotification('hide-status', () => {
     statusBarItem.hide()
-    resolve_loaded()
   })
 
   client.onNotification('error', params => {
@@ -137,14 +121,6 @@ export function deactivate(): Thenable<void> | undefined {
 
 class DocumentSemanticTokensProvider implements DocumentSemanticTokensProvider {
   async provideDocumentSemanticTokens(document: TextDocument, token: CancellationToken): Promise<SemanticTokens> {
-    await loaded
-
-    setTimeout(() => resolve_loaded(), 200)
-
-    await new Promise((resolve: Function) => {
-      resolve_loaded = resolve
-    })
-
     const builder = new SemanticTokensBuilder()
 
     const smallNumbers: DecorationOptions[] = []
@@ -156,35 +132,8 @@ class DocumentSemanticTokensProvider implements DocumentSemanticTokensProvider {
       smallNumbers.push({
         range: new Range(start, end),
       })
-      // builder.push(
-      //   dead_code[i], dead_code[i+1], dead_code[i+2], //line, start char, length
-      //   this._encodeTokenType('type'),
-      //   // this._encodeTokenModifiers(['documentation']),
-      // )
-      }
+    }
     window.activeTextEditor.setDecorations(smallNumberDecorationType, smallNumbers)
     return builder.build()
-  }
-
-  private _encodeTokenType(tokenType: string): number {
-    if (tokenTypes.has(tokenType)) {
-      return tokenTypes.get(tokenType)!
-    } else if (tokenType === 'notInLegend') {
-      return tokenTypes.size + 2
-    }
-    return 0
-  }
-
-  private _encodeTokenModifiers(strTokenModifiers: string[]): number {
-    let result = 0
-    for (let i = 0; i < strTokenModifiers.length; i++) {
-      const tokenModifier = strTokenModifiers[i]
-      if (tokenModifiers.has(tokenModifier)) {
-        result = result | (1 << tokenModifiers.get(tokenModifier)!)
-      } else if (tokenModifier === 'notInLegend') {
-        result = result | (1 << tokenModifiers.size + 2)
-      }
-    }
-    return result
   }
 }
