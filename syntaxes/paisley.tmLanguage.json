@@ -3,62 +3,6 @@
 	"name": "Paisley",
 	"patterns": [
 		{
-			"name": "comment.line.debug.paisley",
-			"begin": "(?i)#+[ \\t]*(@DEBUG)[ \\t]+(\\w+)",
-			"end": "(?i)(@END)\\b",
-			"captures": {
-				"1": {
-					"name": "keyword.paisley"
-				},
-				"2": {
-					"name": "keyword.paisley"
-				},
-				"3": {
-					"name": "keyword.paisley"
-				}
-			},
-			"patterns": [
-				{
-					"include": "source.lua"
-				}
-			]
-		},
-		{
-			"name": "comment.line.debug.paisley",
-			"begin": "(?i)#+[ \\t]*(?=@COMMANDS\\b)",
-			"end": "$",
-			"patterns": [
-				{
-					"name": "keyword.paisley",
-					"begin": "(?i)@COMMANDS\\b",
-					"end": "$",
-					"patterns": [
-						{
-							"name": "comment.line.semicolon.paisley",
-							"begin": "[;#]",
-							"end": "$"
-						},
-						{
-							"name": "keyword.paisley",
-							"match": "(?<!:)[ \\t]*[^:, \\t'\";#]+"
-						},
-						{
-							"name": "support.class.paisley",
-							"match": "(?<=:)[ \\t]*(null|boolean|number|string|array(\\[(string|number)\\])?|any)\\b"
-						},
-						{
-							"name": "invalid.illegal.bad_return_value.paisley",
-							"match": "(?<=:)[ \\t]*[^:, \\t'\";]+"
-						},
-						{
-							"name": "comment.line.ignore.paisley",
-							"match": "."
-						}
-					]
-				}
-			]
-		},
-		{
 			"include": "#comments"
 		},
 		{
@@ -92,48 +36,21 @@
 			"patterns": [
 				{
 					"name": "comment.line.number-sign.paisley",
+					"begin": "#\\[\\[",
+					"end": "\\]\\]",
+					"patterns": [
+						{
+							"include": "#annotations"
+						}
+					]
+				},
+				{
+					"name": "comment.line.number-sign.paisley",
 					"begin": "#",
 					"end": "$",
 					"patterns": [
 						{
-							"name": "keyword.paisley",
-							"match": "(?i)@(export|brief|shell|plasma|error|private|sandbox)\\b"
-						},
-						{
-							"match": "(?i)(@param)\\b[ \t]*([^ \t]+)[ \t]*([^ \t]+)",
-							"captures": {
-								"1": {
-									"name": "keyword.paisley"
-								},
-								"2": {
-									"name": "entity.name.variable.paisley"
-								},
-								"3": {
-									"name": "support.class.paisley"
-								}
-							}
-						},
-						{
-							"match": "(?i)(@return)\\b[ \t]*([^ \t]+)",
-							"captures": {
-								"1": {
-									"name": "keyword.paisley"
-								},
-								"2": {
-									"name": "support.class.paisley"
-								}
-							}
-						},
-						{
-							"match": "(?i)(@mutate)\\b[ \t]*([^ \t]+)",
-							"captures": {
-								"1": {
-									"name": "keyword.paisley"
-								},
-								"2": {
-									"name": "entity.name.variable.paisley"
-								}
-							}
+							"include": "#annotations"
 						}
 					]
 				}
@@ -354,6 +271,106 @@
 				},
 				{
 					"include": "#inline_commands"
+				}
+			]
+		},
+		"annotations": {
+			"patterns": [
+				{
+					"name": "keyword.paisley",
+					"match": "(?i)@(export|brief|shell|plasma|error|private|sandbox)\\b"
+				},
+				{
+					"match": "(?i)(@param)\\b[ \t]*([^ \t]+)[ \t]*([^ \t]+)",
+					"captures": {
+						"1": {
+							"name": "keyword.paisley"
+						},
+						"2": {
+							"name": "entity.name.variable.paisley"
+						},
+						"3": {
+							"name": "support.class.paisley"
+						}
+					}
+				},
+				{
+					"match": "(?i)(@return)\\b[ \t]*([^ \t]+)",
+					"captures": {
+						"1": {
+							"name": "keyword.paisley"
+						},
+						"2": {
+							"name": "support.class.paisley"
+						}
+					}
+				},
+				{
+					"match": "(?i)(@mutate)\\b[ \t]*([^ \t]+)",
+					"captures": {
+						"1": {
+							"name": "keyword.paisley"
+						},
+						"2": {
+							"name": "entity.name.variable.paisley"
+						}
+					}
+				},
+				{
+					"name": "comment.line.debug.paisley",
+					"begin": "(?i)(@DEBUG)[ \\t]+(\\w+)",
+					"end": "(?i)(@END)\\b",
+					"captures": {
+						"1": {
+							"name": "keyword.paisley"
+						},
+						"2": {
+							"name": "keyword.paisley"
+						},
+						"3": {
+							"name": "keyword.paisley"
+						}
+					},
+					"patterns": [
+						{
+							"include": "source.lua"
+						}
+					]
+				},
+				{
+					"name": "comment.line.debug.paisley",
+					"begin": "(?i)(?=@COMMANDS\\b)",
+					"end": "$",
+					"patterns": [
+						{
+							"name": "keyword.paisley",
+							"begin": "(?i)@COMMANDS\\b",
+							"end": "$",
+							"patterns": [
+								{
+									"name": "comment.line.semicolon.paisley",
+									"begin": "[;#]",
+									"end": "$"
+								},
+								{
+									"name": "keyword.paisley",
+									"match": "(?<!:)[ \\t]*[^:, \\t'\";#]+"
+								},
+								{
+									"name": "support.class.paisley",
+									"match": "(?<=:)[ \\t]*(null|boolean|number|string|array(\\[(string|number)\\])?|any)\\b"
+								},
+								{
+									"name": "invalid.illegal.bad_return_value.paisley",
+									"match": "(?<=:)[ \\t]*[^:, \\t'\";]+"
+								},
+								{
+									"name": "comment.line.ignore.paisley",
+									"match": "."
+								}
+							]
+						}
+					]
 				}
 			]
 		}
