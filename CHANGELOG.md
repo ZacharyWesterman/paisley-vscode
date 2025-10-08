@@ -2,8 +2,5 @@
 
 All notable changes to the "paisley-vscode" extension will be documented in this file.
 
-Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
-
-## [Unreleased]
-
-- Initial release
+Most of the time, the only updates are to increment the compiler version.
+Those updates are not kept track of here.
