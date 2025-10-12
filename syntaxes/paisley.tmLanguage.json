@@ -15,6 +15,12 @@
 			"include": "#labels"
 		},
 		{
+			"include": "#strings_multiline"
+		},
+		{
+			"include": "#strings_multiline2"
+		},
+		{
 			"include": "#strings"
 		},
 		{
@@ -152,6 +158,32 @@
 				}
 			]
 		},
+		"strings_multiline": {
+			"name": "string.interpolated.paisley",
+			"begin": "\"\"\"",
+			"end": "\"\"\"",
+			"patterns": [
+				{
+					"include": "#escape_sequences"
+				},
+				{
+					"include": "#expressions"
+				},
+				{
+					"include": "#inline_commands"
+				}
+			]
+		},
+		"strings_multiline2": {
+			"name": "string.quoted.single.paisley",
+			"begin": "'''",
+			"end": "'''",
+			"patterns": [
+				{
+					"include": "#escape_sequences"
+				}
+			]
+		},
 		"escape_sequences": {
 			"patterns": [
 				{
@@ -230,6 +262,12 @@
 					"match": "\\\\[^'\"\\$\\{\\} \\t#]+(?=[ \\t]*\\()"
 				},
 				{
+					"include": "#strings_multiline"
+				},
+				{
+					"include": "#strings_multiline2"
+				},
+				{
 					"include": "#strings"
 				},
 				{
@@ -259,6 +297,12 @@
 				{
 					"name": "constant.numeric.paisley",
 					"match": "(?<=[ \\t])-?[0-9\\.]+\\b"
+				},
+				{
+					"include": "#strings_multiline"
+				},
+				{
+					"include": "#strings_multiline2"
 				},
 				{
 					"include": "#strings"
