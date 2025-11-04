@@ -3,7 +3,17 @@
 All notable changes to the "paisley-vscode" extension will be documented in this file.
 
 Most of the time, the only updates are to increment the compiler version.
-Usually, those updates are not kept track of here.
+Unless significant, those updates are not kept track of here.
+
+## [1.3.10] - 2025-11-03
+
+### Added
+
+- Add syntax highlighting for `bitwise` operator
+
+### Updated
+
+- Updated to Paisley v1.18.6
 
 ## [1.3.9] - 2025-11-02
 

@@ -209,7 +209,7 @@
 				},
 				{
 					"name": "keyword.paisley",
-					"match": "\\b(in|exists|like|and|or|not|xor)\\b|\\*|\\+|=|/|%|!=|~=|<|>|&|:|\\-"
+					"match": "\\b(in|exists|like|and|or|not|xor|bitwise)\\b|\\*|\\+|=|/|%|!=|~=|<|>|&|:|\\-"
 				},
 				{
 					"name": "support.class.paisley",
@@ -217,7 +217,7 @@
 				},
 				{
 					"name": "keyword.control.paisley",
-					"match": "\\b(in|exists|like|and|or|not|xor|if|else)\\b"
+					"match": "\\b(if|else)\\b"
 				},
 				{
 					"name": "meta.list_comp.paisley",
