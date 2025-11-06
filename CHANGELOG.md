@@ -5,6 +5,13 @@ All notable changes to the "paisley-vscode" extension will be documented in this
 Most of the time, the only updates are to increment the compiler version.
 Unless significant, those updates are not kept track of here.
 
+## [1.3.11] - 2025-11-06
+
+### Updated
+
+- Prefer `.pai` file extension over `.paisley` (both still supported)
+- Updated to Paisley v1.18.8
+
 ## [1.3.10] - 2025-11-03
 
 ### Added
