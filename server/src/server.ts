@@ -6,17 +6,15 @@ import {
   TextDocumentSyncKind,
   InitializeResult,
   Diagnostic,
+  HoverParams,
   DiagnosticSeverity,
+  Position,
   TextDocumentChangeEvent,
 } from "vscode-languageserver/node"
 
 import { TextDocument } from "vscode-languageserver-textdocument"
-
 import { DebugCommands } from "./debug"
-
-import * as fs from 'fs'
 import { spawn } from 'child_process'
-import * as path from 'path'
 
 // Create a connection for the server, using Node's IPC as a transport.
 // Also include all preview / proposed LSP features.
@@ -26,6 +24,14 @@ const connection = createConnection(ProposedFeatures.all);
 const documents: TextDocuments<TextDocument> = new TextDocuments(TextDocument)
 
 let PROGRAM: string = `${__dirname}/build/${process.platform === 'win32' ? 'paisley.exe' : 'paisley'}`
+
+type HoverInfo = Record<string, {
+  start: Position;
+  end: Position;
+  text: string;
+}>
+
+let hover: HoverInfo = {}
 
 function command(command: string, args: string[], opts: any, onoutput: any, input_data: string = ''): Promise<void> {
 
@@ -59,6 +65,7 @@ connection.onInitialize((params: InitializeParams) => {
   const result: InitializeResult = {
     capabilities: {
       textDocumentSync: TextDocumentSyncKind.Incremental,
+      hoverProvider: true,
     },
   }
 
@@ -68,6 +75,7 @@ connection.onInitialize((params: InitializeParams) => {
 documents.onDidChangeContent(async (change: TextDocumentChangeEvent<TextDocument>) => {
   let diagnostics: Diagnostic[] = await DebugCommands.parse(change.document)
   let dead_code: number[] = []
+  hover = {} //Wipe all over info as it will be re-added.
 
   const text = change.document.getText()
 
@@ -91,7 +99,28 @@ documents.onDidChangeContent(async (change: TextDocumentChangeEvent<TextDocument
       return
     }
 
-    if (!['E', 'W', 'H', 'I'].includes(message_type)) return
+    if (message_type === 'H')
+    {
+      const key = `${pos[0]}|${pos[1]}`
+      if (key in hover) {
+        hover[key].text += `\n${message}`
+      } else {
+        hover[key] ={
+          start: {
+            line: pos[0],
+            character: pos[1],
+          },
+          end: {
+            line: pos[2],
+            character: pos[3],
+          },
+          text: message,
+        }
+      }
+      return
+    }
+
+    if (!['E', 'W', 'I'].includes(message_type)) return
 
     diagnostics.push({
       severity: {
@@ -116,7 +145,24 @@ documents.onDidChangeContent(async (change: TextDocumentChangeEvent<TextDocument
   }, text).then(() => {
     connection.sendDiagnostics({ uri: change.document.uri, diagnostics })
     connection.sendNotification('dead_code', dead_code)
+    // connection.sendNotification('hover', hover)
   })
+})
+
+
+connection.onHover((params: HoverParams) => {
+  for (const h of Object.values(hover)) {
+    if (
+      h.start.line <= params.position.line &&
+      h.start.character <= params.position.character &&
+      h.end.line >= params.position.line &&
+      h.end.character >= params.position.character
+    ) {
+      return {
+        contents: h.text.replace(/\\n/g, '\n').replace(/\n/g, '\n\n'),
+      }
+    }
+  }
 })
 
 // Make the text document manager listen on the connection

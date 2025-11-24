@@ -10,7 +10,6 @@ import {
   CancellationToken,
   SemanticTokens,
   SemanticTokensBuilder,
-  OverviewRulerLane,
   DecorationOptions,
   Position,
   Range,
@@ -54,6 +53,7 @@ const smallNumberDecorationType = window.createTextEditorDecorationType({
 
 
 export function activate(context: ExtensionContext) {
+  //For dead code and semantic re-coloring
   context.subscriptions.push(languages.registerDocumentSemanticTokensProvider({ language: 'paisley' }, new DocumentSemanticTokensProvider(), legend))
 
   const statusBarItem = window.createStatusBarItem(StatusBarAlignment.Left)
@@ -119,7 +119,7 @@ export function deactivate(): Thenable<void> | undefined {
   return client.stop()
 }
 
-class DocumentSemanticTokensProvider implements DocumentSemanticTokensProvider {
+class DocumentSemanticTokensProvider {
   async provideDocumentSemanticTokens(document: TextDocument, token: CancellationToken): Promise<SemanticTokens> {
     const builder = new SemanticTokensBuilder()
 
