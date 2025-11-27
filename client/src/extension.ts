@@ -13,8 +13,6 @@ import {
   DecorationOptions,
   Position,
   Range,
-  Hover,
-  MarkdownString,
 } from "vscode"
 
 import {

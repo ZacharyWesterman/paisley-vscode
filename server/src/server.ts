@@ -9,7 +9,6 @@ import {
   HoverParams,
   DiagnosticSeverity,
   Position,
-  TextDocumentChangeEvent,
 } from "vscode-languageserver/node"
 
 import { TextDocument } from "vscode-languageserver-textdocument"
@@ -31,7 +30,7 @@ type HoverInfo = Record<string, {
   text: string;
 }>
 
-let hover: HoverInfo = {}
+const hover: Record<string,HoverInfo> = {}
 
 function command(command: string, args: string[], opts: any, onoutput: any, input_data: string = ''): Promise<void> {
 
@@ -72,21 +71,22 @@ connection.onInitialize((params: InitializeParams) => {
   return result
 })
 
-documents.onDidChangeContent(async (change: TextDocumentChangeEvent<TextDocument>) => {
-  let diagnostics: Diagnostic[] = await DebugCommands.parse(change.document)
+const processDocument = async (document: TextDocument) => {
+  let diagnostics: Diagnostic[] = await DebugCommands.parse(document)
   let dead_code: number[] = []
-  hover = {} //Wipe all over info as it will be re-added.
+  hover[document.uri] = {} //Wipe all over info as it will be re-added.
+  const doc_hover = hover[document.uri]
 
-  const text = change.document.getText()
+  const text = document.getText()
 
-  let file_path = change.document.uri.replace('file://', '').replace('/c%3A', 'C:')
+  let file_path = document.uri.replace('file://', '').replace('/c%3A', 'C:')
 
   let cmds: string[] = ['--language-server', `--stdin=${file_path}`, '-']
   DebugCommands.commandTypes.forEach((value: String, key: String) => {
     cmds.push(`-c${key}:${value}`)
   })
 
-  command(PROGRAM, cmds, {cwd: __dirname + '/build', timeout: 2000}, (line: string) => {
+  await command(PROGRAM, cmds, {cwd: __dirname + '/build', timeout: 2000}, (line: string) => {
     const p1 = line.indexOf(',')
     const message_type = line.substring(0, p1)
     const index = line.indexOf('|')
@@ -103,9 +103,9 @@ documents.onDidChangeContent(async (change: TextDocumentChangeEvent<TextDocument
     {
       const key = `${pos[0]}|${pos[1]}`
       if (key in hover) {
-        hover[key].text += `\n${message}`
+        doc_hover[key].text += `\n${message}`
       } else {
-        hover[key] ={
+        doc_hover[key] ={
           start: {
             line: pos[0],
             character: pos[1],
@@ -142,15 +142,24 @@ documents.onDidChangeContent(async (change: TextDocumentChangeEvent<TextDocument
       message: message,
       source: 'Paisley',
     })
-  }, text).then(() => {
-    connection.sendDiagnostics({ uri: change.document.uri, diagnostics })
-    connection.sendNotification('dead_code', dead_code)
-  })
+  }, text)
+
+  connection.sendDiagnostics({ uri: document.uri, diagnostics })
+  connection.sendNotification('dead_code', dead_code)
+}
+
+documents.onDidChangeContent((change) => {
+  processDocument(change.document)
 })
 
+documents.onDidClose((event) => {
+  delete hover[event.document.uri]
+})
 
 connection.onHover((params: HoverParams) => {
-  for (const h of Object.values(hover)) {
+  const doc_hover = hover[params.textDocument.uri] || {}
+
+  for (const h of Object.values(doc_hover)) {
     if (
       h.start.line <= params.position.line &&
       h.start.character <= params.position.character &&
