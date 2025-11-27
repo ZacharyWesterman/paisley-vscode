@@ -4,7 +4,7 @@ cd server/out || exit 1
 mkdir -p build || exit 1
 cd build || exit 1
 
-version=v1.18.16
+version=v1.18.17
 # Download the paisley compiler for both Linux and Windows
 for i in paisley paisley.exe; do
     rm -f $i

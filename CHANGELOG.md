@@ -5,11 +5,12 @@ All notable changes to the "paisley-vscode" extension will be documented in this
 Most of the time, the only updates are to increment the compiler version.
 Unless significant, those updates are not kept track of here.
 
-## [1.4.2] - 2025-11-26
+## [1.4.2] - 2025-11-27
 
 ### Updated
 
 - Allow colored text in hover provider messages.
+- Update to Paisley v1.18.17
 
 ## [1.4.1] - 2025-11-24
 
