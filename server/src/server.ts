@@ -145,7 +145,6 @@ documents.onDidChangeContent(async (change: TextDocumentChangeEvent<TextDocument
   }, text).then(() => {
     connection.sendDiagnostics({ uri: change.document.uri, diagnostics })
     connection.sendNotification('dead_code', dead_code)
-    // connection.sendNotification('hover', hover)
   })
 })
 
@@ -160,6 +159,7 @@ connection.onHover((params: HoverParams) => {
     ) {
       return {
         contents: h.text.replace(/\\n/g, '\n').replace(/\n/g, '\n\n'),
+        trustedContent: true,
       }
     }
   }
