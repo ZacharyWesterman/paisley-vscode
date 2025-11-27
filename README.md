@@ -7,6 +7,6 @@ Features include:
 - Syntax highlighting.
 - Syntax validation.
 - Type checking.
-- Hover info for some code entities.
+- Hover info for code entities.
 - Warnings for poorly formed code.
 - Marking dead code blocks.

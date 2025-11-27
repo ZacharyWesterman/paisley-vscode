@@ -158,8 +158,10 @@ connection.onHover((params: HoverParams) => {
       h.end.character >= params.position.character
     ) {
       return {
-        contents: h.text.replace(/\\n/g, '\n').replace(/\n/g, '\n\n'),
-        trustedContent: true,
+        contents: {
+          kind: 'markdown',
+          value: h.text.replace(/\\n/g, '\n').replace(/\n/g, '\n\n'),
+        }
       }
     }
   }
