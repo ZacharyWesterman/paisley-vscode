@@ -11,7 +11,6 @@ import {
   SemanticTokens,
   SemanticTokensBuilder,
   DecorationOptions,
-  Position,
   Range,
 } from "vscode"
 
@@ -23,7 +22,13 @@ import {
 } from "vscode-languageclient/node"
 
 let client: LanguageClient
-let dead_code: number[] = []
+
+type RecolorInfo = {
+  id: string;
+  span: Range;
+}
+
+let recoloring: RecolorInfo[] = []
 
 const tokenTypes = new Map<string, number>()
 const tokenModifiers = new Map<string, number>()
@@ -46,8 +51,8 @@ const legend = (function() {
   return new SemanticTokensLegend(tokenTypesLegend, tokenModifiersLegend)
 })()
 
-// create a decorator type that we use to decorate small numbers
-const smallNumberDecorationType = window.createTextEditorDecorationType({
+// Special text decorators
+const deadCodeDecorator = window.createTextEditorDecorationType({
   opacity: "50%",
 });
 
@@ -111,8 +116,8 @@ export function activate(context: ExtensionContext) {
     window.showErrorMessage(params)
   })
 
-  client.onNotification('dead_code', params => {
-    dead_code = params
+  client.onNotification('recoloring', params => {
+    recoloring = params
   })
 
   // Start the client. This will also launch the server
@@ -130,17 +135,58 @@ class DocumentSemanticTokensProvider {
   async provideDocumentSemanticTokens(document: TextDocument, token: CancellationToken): Promise<SemanticTokens> {
     const builder = new SemanticTokensBuilder()
 
-    const smallNumbers: DecorationOptions[] = []
+    const deadCode: DecorationOptions[] = []
 
-    for (let i = 0; i < dead_code.length; i += 4)
+    for (const recolor of recoloring)
     {
-      const start: Position = new Position(dead_code[i], dead_code[i+1])
-      const end: Position = new Position(dead_code[i+2], dead_code[i+3]+1)
-      smallNumbers.push({
-        range: new Range(start, end),
-      })
+      switch (recolor.id) {
+        case 'dead_code':
+          deadCode.push({range: recolor.span});
+          break;
+        case 'constant':
+          builder.push(
+            recolor.span.start.line,
+            recolor.span.start.character,
+            recolor.span.end.character - recolor.span.start.character,
+            this.encodeTokenType('variable'),
+            this.encodeTokenModifiers(['readonly']),
+          )
+          break;
+        case 'func_call':
+          builder.push(
+            recolor.span.start.line,
+            recolor.span.start.character,
+            recolor.span.end.character - recolor.span.start.character,
+            this.encodeTokenType('function'),
+            this.encodeTokenModifiers(['readonly']),
+          )
+          break;
+      }
     }
-    window.activeTextEditor.setDecorations(smallNumberDecorationType, smallNumbers)
+
+    window.activeTextEditor.setDecorations(deadCodeDecorator, deadCode)
     return builder.build()
   }
+
+	private encodeTokenType(tokenType: string): number {
+		if (tokenTypes.has(tokenType)) {
+			return tokenTypes.get(tokenType)!
+		} else if (tokenType === 'notInLegend') {
+			return tokenTypes.size + 2
+		}
+		return 0
+	}
+
+	private encodeTokenModifiers(strTokenModifiers: string[]): number {
+		let result = 0
+		for (let i = 0; i < strTokenModifiers.length; i++) {
+			const tokenModifier = strTokenModifiers[i]
+			if (tokenModifiers.has(tokenModifier)) {
+				result = result | (1 << tokenModifiers.get(tokenModifier)!)
+			} else if (tokenModifier === 'notInLegend') {
+				result = result | (1 << tokenModifiers.size + 2)
+			}
+		}
+		return result
+	}
 }

@@ -9,6 +9,7 @@ import {
   HoverParams,
   DiagnosticSeverity,
   Position,
+  Range,
 } from "vscode-languageserver/node"
 
 import { TextDocument } from "vscode-languageserver-textdocument"
@@ -29,6 +30,11 @@ type HoverInfo = Record<string, {
   end: Position;
   text: string;
 }>
+
+type RecolorInfo = {
+  id: string;
+  span: Range;
+}
 
 const hover: Record<string,HoverInfo> = {}
 
@@ -73,7 +79,7 @@ connection.onInitialize((params: InitializeParams) => {
 
 const processDocument = async (document: TextDocument) => {
   let diagnostics: Diagnostic[] = await DebugCommands.parse(document)
-  let dead_code: number[] = []
+  let recoloring: RecolorInfo[] = []
   hover[document.uri] = {} //Wipe all over info as it will be re-added.
   const doc_hover = hover[document.uri]
 
@@ -95,7 +101,19 @@ const processDocument = async (document: TextDocument) => {
 
     if (message_type === 'D')
     {
-      dead_code.push(...pos)
+      recoloring.push({
+        id: message.split('|', 1)[0],
+        span: {
+          start: {
+            line: pos[0],
+            character: pos[1],
+          },
+          end: {
+            line: pos[2],
+            character: pos[3],
+          },
+        },
+      })
       return
     }
 
@@ -145,7 +163,7 @@ const processDocument = async (document: TextDocument) => {
   }, text)
 
   connection.sendDiagnostics({ uri: document.uri, diagnostics })
-  connection.sendNotification('dead_code', dead_code)
+  connection.sendNotification('recoloring', recoloring)
 }
 
 documents.onDidChangeContent((change) => {
