@@ -217,7 +217,7 @@
 				},
 				{
 					"name": "keyword.control.paisley",
-					"match": "\\b(if|else)\\b"
+					"match": "\\b(if|else|then)\\b"
 				},
 				{
 					"name": "meta.list_comp.paisley",
