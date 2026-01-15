@@ -143,7 +143,19 @@
 							"match": "(is|not|>|=|<|!)"
 						},
 						{
-							"name": "entity.name.variable.paisley",
+							"include": "#strings"
+						},
+						{
+							"include": "#strings2"
+						},
+						{
+							"include": "#strings_multiline"
+						},
+						{
+							"include": "#strings_multiline2"
+						},
+						{
+							"name": "string.paisley",
 							"match": "[^\\s$;]+"
 						}
 					]
