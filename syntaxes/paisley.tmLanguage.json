@@ -140,7 +140,7 @@
 						},
 						{
 							"name": "keyword.paisley",
-							"match": "(is|not|>|=|<|!)"
+							"match": "(and|or|is|not|>|=|<|!)"
 						},
 						{
 							"include": "#strings"
