@@ -33,6 +33,9 @@
 			"include": "#inline_commands"
 		},
 		{
+			"include": "#directives"
+		},
+		{
 			"name": "comment.line.semicolon.paisley",
 			"match": ";"
 		}
@@ -121,6 +124,37 @@
 				{
 					"name": "constant.numeric.paisley",
 					"match": "(?<=[ \\t])-?[0-9\\.]+\\b"
+				}
+			]
+		},
+		"directives": {
+			"patterns": [
+				{
+					"name": "keyword.control.paisley",
+					"begin": "\\$([ \\t]*\\w+)?",
+					"end": "[$\\n;]",
+					"patterns": [
+						{
+							"name": "keyword.paisley",
+							"match": "(and|or|>|=|<|!)"
+						},
+						{
+							"include": "#strings"
+						},
+						{
+							"include": "#strings2"
+						},
+						{
+							"include": "#strings_multiline"
+						},
+						{
+							"include": "#strings_multiline2"
+						},
+						{
+							"name": "string.paisley",
+							"match": "[^\\s$;()]+"
+						}
+					]
 				}
 			]
 		},
