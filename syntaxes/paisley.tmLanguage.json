@@ -131,16 +131,12 @@
 			"patterns": [
 				{
 					"name": "keyword.control.paisley",
-					"begin": "\\$",
+					"begin": "\\$([ \\t]*\\w+)?",
 					"end": "[$\\n;]",
 					"patterns": [
 						{
-							"name": "keyword.control.paisley",
-							"match": "(if|elif|else|end)"
-						},
-						{
 							"name": "keyword.paisley",
-							"match": "(and|or|is|not|>|=|<|!)"
+							"match": "(and|or|>|=|<|!)"
 						},
 						{
 							"include": "#strings"
@@ -156,7 +152,7 @@
 						},
 						{
 							"name": "string.paisley",
-							"match": "[^\\s$;]+"
+							"match": "[^\\s$;()]+"
 						}
 					]
 				}
