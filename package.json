@@ -3,7 +3,7 @@
   "displayName": "Paisley",
   "description": "Syntax highlighter and language support for the Paisley scripting language.",
   "icon": "images/paisley-logo.png",
-  "version": "1.4.7",
+  "version": "1.4.8",
   "license": "GPL-3",
   "publisher": "skrunk",
   "engines": {
