@@ -2,6 +2,7 @@
 
 This extension provides language support for the [Paisley](https://github.com/ZacharyWesterman/paisley) scripting language.
 The current supported version is at least v1.20.0, and will work fine for more recent versions (if there's no new syntax).
+If the system has Paisley installed, then that version will be used. Otherwise, a fallback build (bundled with this extension) is used.
 
 Features include:
 - Syntax highlighting.

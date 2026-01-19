@@ -36,7 +36,7 @@ type RecolorInfo = {
   span: Range;
 }
 
-const hover: Record<string,HoverInfo> = {}
+const hover: Record<string, HoverInfo> = {}
 
 function command(command: string, args: string[], opts: any, onoutput: any, input_data: string = ''): Promise<void> {
 
@@ -61,6 +61,11 @@ function command(command: string, args: string[], opts: any, onoutput: any, inpu
       reject(new Error('Command timed out'))
     })
 
+    process.on('error', (e) => {
+      process.kill()
+      reject(e)
+    })
+
     process.stdin.write(input_data)
     process.stdin.end()
   })
@@ -73,6 +78,11 @@ connection.onInitialize((params: InitializeParams) => {
       hoverProvider: true,
     },
   }
+
+  // If the user's system has Paisley installed, use that version.
+  command('paisley', ['--version'], { timeout: 2000 }, () => { })
+    .then(() => { PROGRAM = 'paisley'; })
+    .catch(() => { })
 
   return result
 })
@@ -92,15 +102,14 @@ const processDocument = async (document: TextDocument) => {
     cmds.push(`-c${key}:${value}`)
   })
 
-  await command(PROGRAM, cmds, {cwd: __dirname + '/build', timeout: 2000}, (line: string) => {
+  await command(PROGRAM, cmds, { cwd: __dirname + '/build', timeout: 2000 }, (line: string) => {
     const p1 = line.indexOf(',')
     const message_type = line.substring(0, p1)
     const index = line.indexOf('|')
     const pos = line.substring(p1 + 1, index).split(',').map((x: string) => parseInt(x))
     const message = line.substring(index + 1)
 
-    if (message_type === 'D')
-    {
+    if (message_type === 'D') {
       recoloring.push({
         id: message.split('|', 1)[0],
         span: {
@@ -117,13 +126,12 @@ const processDocument = async (document: TextDocument) => {
       return
     }
 
-    if (message_type === 'H')
-    {
+    if (message_type === 'H') {
       const key = `${pos[0]}|${pos[1]}`
       if (key in hover) {
         doc_hover[key].text += `\n${message}`
       } else {
-        doc_hover[key] ={
+        doc_hover[key] = {
           start: {
             line: pos[0],
             character: pos[1],

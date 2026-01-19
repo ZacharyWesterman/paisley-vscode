@@ -5,6 +5,12 @@ All notable changes to the "paisley-vscode" extension will be documented in this
 Most of the time, the only updates are to increment the compiler version.
 Unless significant, those updates are not kept track of here.
 
+## [1.4.9] - 2026-01-19
+
+### Updated
+
+- Use system installation of Paisley if installed, otherwise fallback to bundled version.
+
 ## [1.4.8] - 2026-01-18
 
 ### Added
