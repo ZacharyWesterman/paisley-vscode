@@ -5,6 +5,16 @@ All notable changes to the "paisley-vscode" extension will be documented in this
 Most of the time, the only updates are to increment the compiler version.
 Unless significant, those updates are not kept track of here.
 
+## [1.4.10] - 2026-02-16
+
+### Updated
+
+- Update to Paisley v1.20.4
+
+### Fixed
+
+- Change multi-line comment terminator from `]]` to the correct `#]]`.
+
 ## [1.4.9] - 2026-01-19
 
 ### Updated

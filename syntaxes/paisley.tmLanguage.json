@@ -46,7 +46,7 @@
 				{
 					"name": "comment.line.number-sign.paisley",
 					"begin": "#\\[\\[",
-					"end": "\\]\\]",
+					"end": "#\\]\\]",
 					"patterns": [
 						{
 							"include": "#annotations"
@@ -367,16 +367,16 @@
 					"match": "(?i)@(export|brief|shell|plasma|error|private|sandbox|allow_elision)\\b"
 				},
 				{
-					"match": "(?i)(@param)\\b[ \t]*([^ \t]+)[ \t]*([^ \t]+)",
+					"match": "(?i)(@param)(\\b[ \t]*([^ \t]+)[ \t]*([^ \t]+))?",
 					"captures": {
 						"1": {
 							"name": "keyword.paisley"
 						},
 						"2": {
-							"name": "entity.name.variable.paisley"
+							"name": "support.class.paisley"
 						},
 						"3": {
-							"name": "support.class.paisley"
+							"name": "entity.name.variable.paisley"
 						}
 					}
 				},
