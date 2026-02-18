@@ -90,7 +90,7 @@
 				{
 					"name": "keyword.control.paisley",
 					"begin": "\\b(let|initial)\\b",
-					"end": "=|$|(?=[;#])",
+					"end": "(?<==)|$|(?=[;#])",
 					"patterns": [
 						{
 							"include": "#expressions"
@@ -98,6 +98,11 @@
 						{
 							"name": "entity.name.variable.paisley",
 							"match": "\\b[a-zA-Z_]\\w*\\b(?![ \\t]*\\()"
+						},
+						{
+							"name": "keyword.paisley",
+							"match": "([-+&/%*]|//|%%)?=",
+							"pop": true
 						}
 					]
 				}
