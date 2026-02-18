@@ -69,7 +69,7 @@
 			"patterns": [
 				{
 					"name": "keyword.control.paisley",
-					"match": "\\b(for|while|in|do|if|then|elif|else|end|continue|break|cache|defer|subroutine|gosub|return|stop|define|require|match|using|as|try|catch)\\b"
+					"match": "\\b(for|while|in|do|if|then|elif|else|end|continue|break|cache|defer|subroutine|function|gosub|call|return|stop|define|require|match|using|as|try|catch)\\b"
 				},
 				{
 					"name": "meta.var_delete.paisley",
@@ -115,7 +115,7 @@
 				},
 				{
 					"name": "variable.language.command.paisley",
-					"match": "(^|(?<=\\bdo\\b|\\bthen\\b|[;\\|]|\\bend\\b|\\belse\\b|\\bsubroutine[ \\t]+[^'\"\\$\\{\\} \\t#;]+))[ \\t]*(?!(for|while|in|do|if|then|elif|else|end|continue|break|subroutine|gosub|return|stop|delete|let|initial|define|require|match|using|as|catch)\\b)[^'\"\\$\\{\\} \\t#;<>\\|]+"
+					"match": "(^|(?<=\\bdo\\b|\\bthen\\b|[;\\|]|\\bend\\b|\\belse\\b|\\b(subroutine|function)[ \\t]+[^'\"\\$\\{\\} \\t#;]+))[ \\t]*(?!(for|while|in|do|if|then|elif|else|end|continue|break|subroutine|function|gosub|return|stop|delete|let|initial|define|require|match|using|as|catch)\\b)[^'\"\\$\\{\\} \\t#;<>\\|]+"
 				},
 				{
 					"name": "entity.name.variable.paisley",
@@ -161,15 +161,15 @@
 		"labels": {
 			"patterns": [
 				{
-					"name": "support.class.paisley",
-					"match": "(?<=\\bsubroutine)[ \\t]+[^'\"\\$\\{\\} \\t#;]+"
+					"name": "entity.name.function.paisley",
+					"match": "((?<=\\bsubroutine)|(?<=\\bfunction))[ \\t]+[^'\"\\$\\{\\} \\t#;]+"
 				},
 				{
-					"name": "support.class.paisley",
-					"match": "(?<=\\bgosub)[ \\t]+[^'\"\\$\\{\\} \\t#;]+"
+					"name": "entity.name.function.paisley",
+					"match": "((?<=\\bgosub)|(?<=\\bcall))[ \\t]+[^'\"\\$\\{\\} \\t#;]+"
 				},
 				{
-					"name": "support.class.paisley",
+					"name": "entity.name.function.paisley",
 					"match": "(?<=\\bbreak[ \\t]+cache)[ \\t]+[^'\"\\$\\{\\} \\t#;]+"
 				}
 			]
@@ -326,11 +326,11 @@
 			"patterns": [
 				{
 					"name": "keyword.control.paisley",
-					"match": "(?<=\\{)[ \\t]*gosub\\b"
+					"match": "(?<=\\{)[ \\t]*(gosub|call)\\b"
 				},
 				{
-					"name": "support.class.paisley",
-					"match": "(?<=\\{[ \\t]*gosub)[ \\t]+[^'\"\\$\\{\\} \\t#]+"
+					"name": "entity.name.function.paisley",
+					"match": "((?<=\\{[ \\t]*gosub)|(?<=\\{[ \\t]*call))[ \\t]+[^'\"\\$\\{\\} \\t#]+"
 				},
 				{
 					"name": "variable.language.paisley",
