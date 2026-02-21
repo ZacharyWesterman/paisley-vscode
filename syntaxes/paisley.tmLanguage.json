@@ -409,7 +409,7 @@
 				},
 				{
 					"name": "comment.line.debug.paisley",
-					"begin": "(?i)(@DEBUG)[ \\t]+(\\w+)",
+					"begin": "(?i)(@DEBUG)[ \\t]*([^\\s(]+)?",
 					"end": "(?i)(@END)\\b",
 					"captures": {
 						"1": {
