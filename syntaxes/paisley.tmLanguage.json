@@ -397,17 +397,6 @@
 					}
 				},
 				{
-					"match": "(?i)(@mutate)\\b[ \t]*([^ \t]+)",
-					"captures": {
-						"1": {
-							"name": "keyword.paisley"
-						},
-						"2": {
-							"name": "entity.name.variable.paisley"
-						}
-					}
-				},
-				{
 					"name": "comment.line.debug.paisley",
 					"begin": "(?i)(@DEBUG)[ \\t]*([^\\s(]+)?",
 					"end": "(?i)(@END)\\b",
