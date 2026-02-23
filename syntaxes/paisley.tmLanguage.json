@@ -398,8 +398,20 @@
 				},
 				{
 					"name": "comment.line.debug.paisley",
-					"begin": "(?i)(@DEBUG)[ \\t]*([^\\s(]+)?",
-					"end": "(?i)(@END)\\b",
+					"match": "(?i)(@DEBUG)[ \\t]*\\{([^}\\n]*)\\}?",
+					"captures": {
+						"1": {
+							"name": "keyword.paisley"
+						},
+						"2": {
+							"name": "string.paisley"
+						}
+					}
+				},
+				{
+					"name": "comment.line.debug.paisley",
+					"begin": "(?i)(@DEBUG)[ \\t]*([^\\s({]+)?",
+					"end": "(?i)(@END\\b)|(?=#\\]\\])",
 					"captures": {
 						"1": {
 							"name": "keyword.paisley"
