@@ -5,6 +5,12 @@ All notable changes to the "paisley-vscode" extension will be documented in this
 Most of the time, the only updates are to increment the compiler version.
 Unless significant, those updates are not kept track of here.
 
+## [1.4.11] - 2026-02-27
+
+### Updated
+
+- Add syntax highlighting for future `debug` comment annotations.
+
 ## [1.4.10] - 2026-02-16
 
 ### Updated
