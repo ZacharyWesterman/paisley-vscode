@@ -34,7 +34,7 @@
     ],
     // Indent after certain keywords
     "indentationRules": {
-        "increaseIndentPattern": "^(do|then|else)\\s*$|\\bsubroutine[ \\t]+[^'\"\\$\\{\\} \\t]+$",
+        "increaseIndentPattern": "^(do|then|else)\\s*$|\\b(subroutine|function)[ \\t]+[^'\"\\$\\{\\} \\t]+$",
         "decreaseIndentPattern": "^(?<!\\$)\\s*(end|else|elif)\\s*$"
     }
 }
