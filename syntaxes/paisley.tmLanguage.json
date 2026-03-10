@@ -1,5 +1,4 @@
 {
-	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
 	"name": "Paisley",
 	"patterns": [
 		{
@@ -370,6 +369,22 @@
 				{
 					"name": "keyword.paisley",
 					"match": "(?i)@(export|brief|shell|plasma|error|private|sandbox|allow_elision)\\b"
+				},
+				{
+					"match": "(?i)(@type)(\\b.+)($|#\\]\\])",
+					"captures": {
+						"1": {
+							"name": "keyword.paisley"
+						},
+						"2": {
+							"patterns": [
+								{
+									"match": "[a-z\\[\\]\\|]+",
+									"name": "support.class.paisley"
+								}
+							]
+						}
+					}
 				},
 				{
 					"match": "(?i)(@param)(\\b[ \t]*([^ \t]+)[ \t]*([^ \t]+))?",

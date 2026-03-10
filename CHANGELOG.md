@@ -5,6 +5,12 @@ All notable changes to the "paisley-vscode" extension will be documented in this
 Most of the time, the only updates are to increment the compiler version.
 Unless significant, those updates are not kept track of here.
 
+## [1.4.13] - 2026-03-09
+
+### Added
+
+- Add syntax highlighting for future `@type` variable annotations.
+
 ## [1.4.12] - 2026-03-06
 
 ### Fixed
