@@ -126,6 +126,10 @@
 					"match": "(?<=\\bfor)([ \\t]+[a-zA-Z_]\\w*)+[ \\t]+\\b"
 				},
 				{
+					"name": "entity.name.variable.paisley",
+					"match": "(?<=\\bcatch)([ \\t]+[a-zA-Z_]\\w*)\\b"
+				},
+				{
 					"name": "constant.numeric.paisley",
 					"match": "(?<=[ \\t])-?[0-9\\.]+\\b"
 				}
