@@ -119,7 +119,7 @@
 				},
 				{
 					"name": "variable.language.command.paisley",
-					"match": "(^|(?<=\\bdo\\b|\\bthen\\b|[;\\|]|\\bend\\b|\\belse\\b|\\b(subroutine|function)[ \\t]+[^'\"\\$\\{\\} \\t#;]+))[ \\t]*(?!(for|while|in|do|if|then|elif|else|end|continue|break|subroutine|function|gosub|return|stop|delete|let|initial|define|require|match|using|as|catch)\\b)[^'\"\\$\\{\\} \\t#;<>\\|]+"
+					"match": "(^|(?<=\\bdo\\b|\\bthen\\b|[;\\|]|\\bend\\b|\\belse\\b|\\b(subroutine|function)[ \\t]+[^'\"\\$\\{\\} \\t#;]+))[ \\t]*(?!(for|while|in|do|if|then|elif|else|end|continue|break|subroutine|function|gosub|return|stop|delete|let|initial|define|require|match|using|as|try|catch)\\b)[^'\"\\$\\{\\} \\t#;<>\\|]+"
 				},
 				{
 					"name": "entity.name.variable.paisley",
