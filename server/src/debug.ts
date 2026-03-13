@@ -23,7 +23,7 @@ export const DebugCommands = {
 		this.commandBodies = new Map<String, Array<Function>>()
 
 		let text = document.getText()
-		let pattern = /(#@[ \t]*DEBUG[ \t]+)([^:,#; \t\(\)]+)\b(.*?@END\b)?/ig
+		let pattern = /(#@[ \t]*DEBUG[ \t]+)([^@:,#; \n\t\(\)\{\}]+)\b(.*?@END\b)?/ig
 		let m: RegExpExecArray | null
 
 		const builtInCommands = ['print', 'sleep', 'time', 'systime', 'sysdate', 'error']
@@ -44,9 +44,9 @@ export const DebugCommands = {
 					},
 					message: `"${m[2]}" is a built-in command whose behavior should not be overridden.`,
 					source: 'Paisley',
-			})
+				})
 			}
-			else if (!this.commandTypes.has(m[2]))
+			else if (m[1] && m[2] && !this.commandTypes.has(m[2]))
 			{
 				problems++
 
