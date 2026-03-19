@@ -371,8 +371,15 @@
 		"annotations": {
 			"patterns": [
 				{
-					"name": "keyword.paisley",
-					"match": "(?i)@(export|brief|shell|plasma|error|private|sandbox|allow_elision)\\b"
+					"match": "(?i)(@error)(\\b[ \t]*([^ \t]+))?",
+					"captures": {
+						"1": {
+							"name": "keyword.paisley"
+						},
+						"2": {
+							"name": "support.class.paisley"
+						}
+					}
 				},
 				{
 					"match": "(?i)(@type)(\\b.+)($|#\\]\\])",
@@ -482,6 +489,10 @@
 							]
 						}
 					]
+				},
+				{
+					"name": "keyword.paisley",
+					"match": "(?i)@(export|brief|shell|plasma|private|sandbox|allow_elision)\\b"
 				}
 			]
 		}
