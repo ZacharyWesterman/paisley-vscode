@@ -71,7 +71,7 @@
 					"match": "\\b(for|while|in|do|if|then|elif|else|end|continue|break|cache|defer|subroutine|function|gosub|call|return|stop|define|require|match|using|as|try|error)\\b"
 				},
 				{
-					"match": "(catch)[ \\t]+(([^'\"\\$\\{\\} \\t#;]+)([ \\t]+(as)([  \\t]+([^'\"\\$\\{\\} \\t#;]+))?)?)?",
+					"match": "(catch)[ \\t]+(([^'\"\\$\\{\\} \\t#;]+([ \\t]+(?!as)[^'\"\\$\\{\\} \\t#;]+)*)([ \\t]+(as)([  \\t]+([^'\"\\$\\{\\} \\t#;]+))?)?)?",
 					"captures": {
 						"1": {
 							"name": "keyword.control.paisley"
@@ -79,10 +79,10 @@
 						"3": {
 							"name": "support.class.paisley"
 						},
-						"5":{
+						"6":{
 							"name": "keyword.control.paisley"
 						},
-						"2":{
+						"5":{
 							"name":"entity.name.variable.paisley"
 						}
 					}
