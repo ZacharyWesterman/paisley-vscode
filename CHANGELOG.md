@@ -9,7 +9,8 @@ Unless significant, those updates are not kept track of here.
 
 ### Updated
 
-- Update syntax highlighting of `error` statement to reflect that it affects control flow.
+- Update syntax highlighting of `error` statement to reflect latest syntax.
+- Update Paisley to v1.21.2.
 
 ## [1.4.14] - 2026-03-10
 
