@@ -151,7 +151,7 @@ class DocumentSemanticTokensProvider {
             this.encodeTokenType('variable'),
             this.encodeTokenModifiers(['readonly']),
           )
-          break;
+          break
         case 'func_call':
           builder.push(
             recolor.span.start.line,
@@ -160,7 +160,15 @@ class DocumentSemanticTokensProvider {
             this.encodeTokenType('function'),
             this.encodeTokenModifiers(['readonly']),
           )
-          break;
+          break
+        case 'type':
+          builder.push(
+            recolor.span.start.line,
+            recolor.span.start.character,
+            recolor.span.end.character - recolor.span.start.character,
+            this.encodeTokenType('class'),
+          )
+          break
       }
     }
 
