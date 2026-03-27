@@ -305,7 +305,7 @@
 				},
 				{
 					"name": "entity.name.function.paisley",
-					"match": "\\\\[^'\"\\$\\{\\} \\t#]+(?=[ \\t]*\\()"
+					"match": "\\\\[^'\"\\$\\{\\} \\t#\\(\\\\)]+(?=[ \\t]*\\()"
 				},
 				{
 					"include": "#strings_multiline"
