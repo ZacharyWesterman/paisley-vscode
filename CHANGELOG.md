@@ -5,6 +5,12 @@ All notable changes to the "paisley-vscode" extension will be documented in this
 Most of the time, the only updates are to increment the compiler version.
 Unless significant, those updates are not kept track of here.
 
+## [1.4.19] - 2026-03-30
+
+## Fixed
+
+- Fix odd indentation when writing constructs on a single line.
+
 ## [1.4.18] - 2026-03-26
 
 ## Added
