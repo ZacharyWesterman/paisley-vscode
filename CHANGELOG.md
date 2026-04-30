@@ -5,6 +5,17 @@ All notable changes to the "paisley-vscode" extension will be documented in this
 Most of the time, the only updates are to increment the compiler version.
 Unless significant, those updates are not kept track of here.
 
+# [1.4.20] - 2026-04-29
+
+## Updated
+
+- Update dependencies
+- Update paisley to v1.21.4
+
+## Added
+
+- Syntax highlighting for `until` keyword.
+
 ## [1.4.19] - 2026-03-30
 
 ## Fixed
