@@ -172,7 +172,7 @@ class DocumentSemanticTokensProvider {
       }
     }
 
-    window.activeTextEditor.setDecorations(deadCodeDecorator, deadCode)
+    window.activeTextEditor?.setDecorations(deadCodeDecorator, deadCode)
     return builder.build()
   }
 
