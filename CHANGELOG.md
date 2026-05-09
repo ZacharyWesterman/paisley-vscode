@@ -5,6 +5,16 @@ All notable changes to the "paisley-vscode" extension will be documented in this
 Most of the time, the only updates are to increment the compiler version.
 Unless significant, those updates are not kept track of here.
 
+# [1.4.21] - 2026-05-09
+
+## Added
+
+- Add support for `@file` annotations.
+
+## Updated
+
+- Update paisley to v1.21.11
+
 # [1.4.20] - 2026-04-29
 
 ## Updated
