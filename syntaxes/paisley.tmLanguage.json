@@ -488,7 +488,7 @@
 				},
 				{
 					"name": "keyword.paisley",
-					"match": "(?i)@(export|brief|shell|plasma|private|sandbox|allow_elision)\\b"
+					"match": "(?i)@(export|brief|shell|plasma|sandbox|allow_elision|file)\\b"
 				}
 			]
 		}

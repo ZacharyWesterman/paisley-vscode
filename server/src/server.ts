@@ -195,7 +195,7 @@ connection.onHover((params: HoverParams) => {
       return {
         contents: {
           kind: 'markdown',
-          value: h.text.replace(/\\n/g, '\n').replace(/\n/g, '\n\n'),
+          value: h.text.replace(/\\n/g, '\n'),
         }
       }
     }
